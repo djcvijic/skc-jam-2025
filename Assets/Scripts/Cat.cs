@@ -3,9 +3,12 @@ using UnityEngine.InputSystem;
 
 public class Cat : PlayerInteractor
 {
+    [SerializeField] private ThoughtBubble thoughtBubble;
+    
     private IInteractable interactingWith;
+    private InteractionType? interactionInProgress;
 
-    public bool InMischief { get; private set; }
+    public bool InMischief => interactionInProgress.HasValue;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -39,17 +42,21 @@ public class Cat : PlayerInteractor
 
     private void OnInteraction(InteractionType type, InputAction.CallbackContext context)
     {
-        if (InMischief || interactingWith is null) return;
+        if (interactingWith is null) return;
+
+        if (interactionInProgress.HasValue && interactionInProgress != type) return;
 
         switch (context.phase)
         {
             case InputActionPhase.Started:
-                InMischief = true;
+                Debug.Log($"Player {playerId} started {type.ToString()} on {interactingWith.gameObject.name}");
+                interactionInProgress = type;
                 interactingWith.InteractStart(type, playerId);
                 break;
             case InputActionPhase.Canceled:
+                Debug.Log($"Player {playerId} canceled {type.ToString()} on {interactingWith.gameObject.name}");
                 interactingWith.InteractEnd(type, playerId);
-                InMischief = false;
+                interactionInProgress = null;
                 break;
         }
     }

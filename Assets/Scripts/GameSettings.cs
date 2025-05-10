@@ -23,6 +23,7 @@ public class GameSettings : ScriptableObject
     public float MaxScoreFactor = 1.2f;
     
     public int MaxPossibleScore => (int)((scratchPoints * MaxScratchAmount + pissPoints + shedPoints) * NumberOfChairs * MaxScoreFactor);
+    public float ThoughBubbleDisplayDuration = 2f;
 
     public float TimePerGame => 300f;
 

@@ -10,7 +10,7 @@ public class TimerUi : MonoBehaviour
     private float timeRemaining;
     private bool timerRunning;
 
-    public event Action OnTimerFinished;
+    public Action OnTimerFinished;
 
     private void Start()
     {
