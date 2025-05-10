@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class Cat : PlayerInteractor
 {
+    [SerializeField] private ThoughtBubble thoughtBubble;
+    
     private IInteractable interactingWith;
     private InteractionType? interactionInProgress;
 

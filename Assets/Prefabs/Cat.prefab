@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 1
+  thoughtBubble: {fileID: 4149407469222361590, guid: 6eb106dd1eb7f074baba4926894f1258, type: 3}
 --- !u!50 &2230677426166154681
 Rigidbody2D:
   serializedVersion: 4
