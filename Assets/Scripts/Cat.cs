@@ -1,7 +1,3 @@
-﻿public class Cat : Player
+﻿public class Cat : PlayerInteractor
 {
-    public override void Interact(IInteractor interactor)
-    {
-        throw new System.NotImplementedException();
-    }
 }

@@ -1,6 +1,18 @@
-public class Chair : InteractableBase
+using System;
+
+public class Chair : IInteractable
 {
-    public override void Interact(IInteractor interactor)
+    private int linjPlayerId;
+    private Tuple<int,int> scratch;
+    private int pissPlayerId;
+
+    public void InteractStart(InteractionType type, int playerId)
     {
+        throw new NotImplementedException();
+    }
+
+    public void InteractEnd(InteractionType type, int playerId)
+    {
+        throw new NotImplementedException();
     }
 }
