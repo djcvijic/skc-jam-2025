@@ -25,6 +25,10 @@ public class GameSettings : ScriptableObject
     public int MaxPossibleScore => (int)((scratchPoints * MaxScratchAmount + pissPoints + shedPoints) * NumberOfChairs * MaxScoreFactor);
     public float ThoughBubbleDisplayDuration = 2f;
 
+    [field: SerializeField] public float CatAcceleration { get; private set; } = 1f;
+    [field: SerializeField] public float CatMaxSpeed { get; private set; } = 1f;
+    [field: SerializeField] public float CatFriction { get; private set; } = 1f;
+
     public float TimePerGame => 300f;
 
     public Color GetPlayerColor(int playerId) 

@@ -47,11 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleRenderer: {fileID: 6508098412438011778}
   offset: {x: 1.5, y: 1.2, z: 0}
-  displayDuration: 2
   emotionSpriteMap:
-  - Key: 0
-    Value: {fileID: 1940058770, guid: 687ee30de454d46689e20e640f9c2c3a, type: 3}
-  testTarget: {fileID: 0}
+  - <Emotion>k__BackingField: 0
+    <Sprite>k__BackingField: {fileID: 1940058770, guid: 687ee30de454d46689e20e640f9c2c3a, type: 3}
 --- !u!1 &6830448404072129658
 GameObject:
   m_ObjectHideFlags: 0

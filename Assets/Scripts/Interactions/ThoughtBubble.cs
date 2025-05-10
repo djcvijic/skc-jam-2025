@@ -1,16 +1,22 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static Extensions;
 
 public class ThoughtBubble : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer bubbleRenderer;
-    [SerializeField] private Vector3 offset = new Vector3(0, 1.5f, 0);
-    [SerializeField] private float DisplayDuration =>  App.Instance.GameSettings.ThoughBubbleDisplayDuration;
+    [SerializeField] private Vector3 offset = new(0, 1.5f, 0);
+    private float DisplayDuration =>  App.Instance.GameSettings.ThoughBubbleDisplayDuration;
 
-    [SerializeField] private List<SerializedKeyValuePair<EmotionType, Sprite>> emotionSpriteMap;
+    [SerializeField] private List<EmotionSprite> emotionSpriteMap;
+
+    [Serializable]
+    private struct EmotionSprite
+    {
+        [field: SerializeField] public EmotionType Emotion { get; private set; }
+        [field: SerializeField] public Sprite Sprite { get; private set; }
+    }
     
     private Transform currentTarget;
     private float timer;
@@ -47,7 +53,7 @@ public class ThoughtBubble : MonoBehaviour
 
     private Sprite GetSpriteFromEmotion(EmotionType emotion)
     {
-        return emotionSpriteMap.FirstOrDefault((emotionSprite) => emotionSprite.Key == emotion).Value;
+        return emotionSpriteMap.FirstOrDefault(emotionSprite => emotionSprite.Emotion == emotion).Sprite;
     }
 
     private void HideBubble()
