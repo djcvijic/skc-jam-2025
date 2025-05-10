@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: GameSettings
   m_EditorClassIdentifier: Assembly-CSharp::GameSettings
-  acceleration: 350
-  maxSpeed: 20
-  friction: 4.5
+  InteractionRange: 2
+  Player1Color: {r: 1, g: 0, b: 0, a: 1}
+  Player2Color: {r: 0, g: 0, b: 0, a: 1}
+  scratchDuration: 5
+  pissDuration: 5
+  shedDuration: 5
+  scratchPoints: 1
+  pissPoints: 1
+  shedPoints: 1
+  MaxScratchAmount: 4
+  NumberOfChairs: 8
+  MaxScoreFactor: 1.2

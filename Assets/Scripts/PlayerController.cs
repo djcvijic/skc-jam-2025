@@ -1,18 +1,27 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    private Vector2 moveInput;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed = 1f;
 
-    public void OnMove(InputAction.CallbackContext context)
+    private Rigidbody2D rigidBody;
+    private Vector2 moveInput;
+
+    private void Awake()
     {
-        moveInput = context.ReadValue<Vector2>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        transform.Translate(moveInput * Time.deltaTime * moveSpeed);
+        var newPosition = rigidBody.position + moveInput * (Time.deltaTime * moveSpeed);
+        rigidBody.MovePosition(newPosition);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
     }
 }

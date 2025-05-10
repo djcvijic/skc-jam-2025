@@ -22,7 +22,7 @@ public class Chair : MonoBehaviour, IInteractable
 
     public void ShowInteract(bool show, int playerId)
     {
-        if (isInteracting) return;
+        if (isInteracting && show) return;
         
         outlineImage.gameObject.SetActive(show);
         outlineImage.color = App.Instance.GameSettings.GetPlayerColor(playerId);
@@ -36,7 +36,7 @@ public class Chair : MonoBehaviour, IInteractable
         
         switch (type)
         {
-            case InteractionType.Scrach:
+            case InteractionType.Scratch:
                 if (scratch.PlayerId == playerId) return false;
                 if (scratch.ScratchAmount >= App.Instance.GameSettings.MaxScratchAmount) return false;
                 break;
@@ -54,6 +54,7 @@ public class Chair : MonoBehaviour, IInteractable
     public void InteractStart(InteractionType type, int playerId)
     {
         // start effect
+        // ParticleSystem.Instantiate();
 
 
         // start progress
@@ -64,7 +65,7 @@ public class Chair : MonoBehaviour, IInteractable
 
         switch (type)
         {
-            case InteractionType.Scrach:
+            case InteractionType.Scratch:
                 actionTimer.OnFinish += () => { Scratch(playerId); };
                 break;
             case InteractionType.Piss:
@@ -93,7 +94,7 @@ public class Chair : MonoBehaviour, IInteractable
         Color color = App.Instance.GameSettings.GetPlayerColor(playerId);
         switch (type)
         {
-            case InteractionType.Scrach:
+            case InteractionType.Scratch:
                 break;
             case InteractionType.Piss:
                 break;
