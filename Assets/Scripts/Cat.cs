@@ -23,20 +23,9 @@ public class Cat : PlayerInteractor
             interactingWith = null;
         }
     }
-    [SerializeField] private float speed = 1f;
-
     protected override void Update()
     {
         base.Update();
-        UpdateMovement_Temp();
-    }
-
-    private void UpdateMovement_Temp()
-    {
-        var moveX = Input.GetAxisRaw("Horizontal");
-        var moveY = Input.GetAxisRaw("Vertical");
-        var moveVector = new Vector2(moveX, moveY).normalized;
-        transform.Translate(moveVector * (speed * Time.deltaTime));
     }
 
     private void OnTriggerEnter2D(Collider2D other)
