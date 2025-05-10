@@ -1,16 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Chair : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Image pissImage;
-    [SerializeField] private Image scratchImage;
-    [SerializeField] private Image linjImage;
-    [SerializeField] private Image outlineImage;
+    [SerializeField] private SpriteRenderer pissImage;
+    [SerializeField] private SpriteRenderer scratchImage;
+    [SerializeField] private SpriteRenderer shedImage;
+    [SerializeField] private SpriteRenderer outlineImage;
 
     private int pissPlayerId;
-    private int linjPlayerId;
+    private int shedPlayerId;
 
     private record ScratchData(int PlayerId, int ScratchAmount);
 
@@ -42,8 +43,8 @@ public class Chair : MonoBehaviour, IInteractable
             case InteractionType.Piss:
                 if (pissPlayerId == playerId) return false;
                 break;
-            case InteractionType.Linj:
-                if (linjPlayerId == playerId) return false;
+            case InteractionType.Shed:
+                if (shedPlayerId == playerId) return false;
                 break;
         }
 
@@ -69,8 +70,8 @@ public class Chair : MonoBehaviour, IInteractable
             case InteractionType.Piss:
                 actionTimer.OnFinish += () => { pissPlayerId = playerId; };
                 break;
-            case InteractionType.Linj:
-                actionTimer.OnFinish += () => { linjPlayerId = playerId; };
+            case InteractionType.Shed:
+                actionTimer.OnFinish += () => { shedPlayerId = playerId; };
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -96,7 +97,7 @@ public class Chair : MonoBehaviour, IInteractable
                 break;
             case InteractionType.Piss:
                 break;
-            case InteractionType.Linj:
+            case InteractionType.Shed:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
