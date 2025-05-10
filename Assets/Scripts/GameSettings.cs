@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "Game Settings")]
 public class GameSettings : ScriptableObject
@@ -10,17 +11,17 @@ public class GameSettings : ScriptableObject
     
     public int scratchDuration = 5;
     public int pissDuration = 5;
-    public int linjDuration = 5;
+    public int shedDuration = 5;
 
     public int scratchPoints = 1;
     public int pissPoints = 1;
-    public int linjPoints = 1;
+    public int shedPoints = 1;
 
     public int MaxScratchAmount = 4;
 
     public int NumberOfChairs = 8;
     public float MaxScoreFactor = 1.2f;
-    public int MaxPossibleScore => (int)((scratchPoints * MaxScratchAmount + pissPoints + linjPoints) * NumberOfChairs * MaxScoreFactor);
+    public int MaxPossibleScore => (int)((scratchPoints * MaxScratchAmount + pissPoints + shedPoints) * NumberOfChairs * MaxScoreFactor);
 
     public float TimePerGame => 300f;
 
@@ -43,8 +44,8 @@ public class GameSettings : ScriptableObject
                 return scratchDuration;
             case InteractionType.Piss:
                 return pissDuration;
-            case InteractionType.Linj:
-                return linjDuration;
+            case InteractionType.Shed:
+                return shedDuration;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
