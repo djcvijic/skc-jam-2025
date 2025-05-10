@@ -10,7 +10,7 @@ public class App : MonoBehaviour
     
     [field: SerializeField] public AppCanvas AppCanvas { get; private set; }
     
-    private void Start()
+    private void Awake()
     {
         Instance = this;
     }
