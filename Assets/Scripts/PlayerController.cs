@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private float Acceleration => App.Instance.GameSettings.CatAcceleration;
     private float MaxSpeed => App.Instance.GameSettings.CatMaxSpeed;
-    public float Friction => App.Instance.GameSettings.CatFriction;
+    private float Friction => App.Instance.GameSettings.CatFriction;
 
     private void Start()
     {
