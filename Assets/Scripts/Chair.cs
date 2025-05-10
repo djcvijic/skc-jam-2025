@@ -25,8 +25,6 @@ public class Chair : MonoBehaviour, IInteractable
 
         outlineImage.gameObject.SetActive(show);
         outlineImage.color = App.Instance.GameSettings.GetPlayerColor(playerId);
-
-        isInteracting = show;
     }
 
     public bool CanInteract(InteractionType type, int playerId)
@@ -50,6 +48,8 @@ public class Chair : MonoBehaviour, IInteractable
 
     public void InteractStart(InteractionType type, int playerId)
     {
+        isInteracting = true;
+
         // start effect
         // ParticleSystem.Instantiate();
 
@@ -95,6 +95,9 @@ public class Chair : MonoBehaviour, IInteractable
 
     public void InteractEnd(InteractionType type, int playerId)
     {
+        Debug.Log("Interaction ended");
+        isInteracting = false;
+        EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
         // update visuals
         progressBar.gameObject.SetActive(false);
     }
@@ -118,4 +121,14 @@ public class Chair : MonoBehaviour, IInteractable
                 break;
         }
     }
+
+    public int GetScoreForPlayer(int playerId)
+    {
+        var pissValue = playerId == pissPlayerId ? App.Instance.GameSettings.pissPoints : 0;
+        var scratchValue = playerId == scratch.PlayerId ? App.Instance.GameSettings.scratchPoints * scratch.ScratchAmount : 0;
+        var shedValue = playerId == shedPlayerId ? App.Instance.GameSettings.shedPoints : 0;
+
+        return pissValue + scratchValue + shedValue;
+    }
+    
 }
