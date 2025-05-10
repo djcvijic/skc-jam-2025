@@ -12,10 +12,9 @@ public class Chair : MonoBehaviour, IInteractable
     private int pissPlayerId;
     private int linjPlayerId;
 
-    /// <summary>
-    /// 1 - player id | 2 - scratchAmount
-    /// </summary>
-    private Tuple<int, int> scratch;
+    private record ScratchData(int PlayerId, int ScratchAmount);
+
+    private ScratchData scratch = new(0, 0);
 
     private bool isInteracting;
     private SimpleTimer actionTimer;
@@ -37,8 +36,8 @@ public class Chair : MonoBehaviour, IInteractable
         switch (type)
         {
             case InteractionType.Scrach:
-                if (scratch.Item1 == playerId) return false;
-                if (scratch.Item2 >= App.Instance.GameSettings.MaxScratchAmount) return false;
+                if (scratch.PlayerId == playerId) return false;
+                if (scratch.ScratchAmount >= App.Instance.GameSettings.MaxScratchAmount) return false;
                 break;
             case InteractionType.Piss:
                 if (pissPlayerId == playerId) return false;
@@ -80,8 +79,7 @@ public class Chair : MonoBehaviour, IInteractable
 
     private void Scratch(int playerId)
     {
-        var newTuple = new Tuple<int, int>(playerId, scratch.Item2+1);
-        scratch = newTuple;
+        scratch = new ScratchData(playerId, scratch.ScratchAmount + 1);
     }
 
     public void InteractEnd(InteractionType type, int playerId)
