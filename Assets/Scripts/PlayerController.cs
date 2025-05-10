@@ -4,20 +4,26 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 1f;
-
-    private Rigidbody2D rigidBody;
+    private Rigidbody2D _rb;
     private Vector2 moveInput;
 
-    private void Awake()
+    private float Acceleration => App.Instance.GameSettings.CatAcceleration;
+    private float MaxSpeed => App.Instance.GameSettings.CatMaxSpeed;
+    private float Friction => App.Instance.GameSettings.CatFriction;
+
+    private void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
+        _rb.drag = Friction;
     }
 
     private void Update()
     {
-        var newPosition = rigidBody.position + moveInput * (Time.deltaTime * moveSpeed);
-        rigidBody.MovePosition(newPosition);
+        Vector3 force = (Vector3)moveInput * Acceleration;
+        _rb.AddForce(force * Time.deltaTime);
+
+        if (_rb.velocity.magnitude > MaxSpeed)
+            _rb.velocity = _rb.velocity.normalized * MaxSpeed;
     }
 
     public void OnMove(InputAction.CallbackContext context)

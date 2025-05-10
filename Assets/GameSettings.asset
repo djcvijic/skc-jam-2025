@@ -24,3 +24,7 @@ MonoBehaviour:
   MaxScratchAmount: 4
   NumberOfChairs: 8
   MaxScoreFactor: 1.2
+  ThoughBubbleDisplayDuration: 2
+  <CatAcceleration>k__BackingField: 100
+  <CatMaxSpeed>k__BackingField: 20
+  <CatFriction>k__BackingField: 20
