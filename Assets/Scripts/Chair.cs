@@ -86,6 +86,8 @@ public class Chair : MonoBehaviour, IInteractable
 
     public void InteractEnd(InteractionType type, int playerId)
     {
+        Debug.Log("Interaction ended");
+        EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
         // update visuals
     }
 
@@ -104,4 +106,14 @@ public class Chair : MonoBehaviour, IInteractable
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
     }
+
+    public int GetScoreForPlayer(int playerId)
+    {
+        var pissValue = playerId == pissPlayerId ? App.Instance.GameSettings.pissPoints : 0;
+        var scratchValue = playerId == scratch.PlayerId ? App.Instance.GameSettings.scratchPoints * scratch.ScratchAmount : 0;
+        var shedValue = playerId == shedPlayerId ? App.Instance.GameSettings.shedPoints : 0;
+
+        return pissValue + scratchValue + shedValue;
+    }
+    
 }

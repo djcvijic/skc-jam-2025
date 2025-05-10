@@ -12,5 +12,7 @@ public class App : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        
+        EventsNotifier.Instance.ResetEvents();
     }
 }

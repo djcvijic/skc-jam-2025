@@ -1,9 +1,14 @@
 ﻿using System;
 
-public class EventsNotifier
+public class EventsNotifier : MonoSingleton<EventsNotifier>
 {
-    public event Action<bool> EventExample;
+    public Action<InteractionType, int> OnInteractionEnded;
+    public void NotifyInteractionEnded(InteractionType interactionType, int playerId)
+        => OnInteractionEnded?.Invoke(interactionType, playerId);
 
-    public void NotifyGraceChanged(bool value)
-        => EventExample?.Invoke(value);
+
+    public void ResetEvents()
+    {
+        OnInteractionEnded = null;
+    }
 }
