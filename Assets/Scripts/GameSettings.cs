@@ -18,6 +18,10 @@ public class GameSettings : ScriptableObject
 
     public int MaxScratchAmount = 4;
 
+    public int NumberOfChairs = 8;
+    public float MaxScoreFactor = 1.2f;
+    public int MaxPossibleScore => (int)((scratchPoints * MaxScratchAmount + pissPoints + linjPoints) * NumberOfChairs * MaxScoreFactor);
+
     public Color GetPlayerColor(int playerId) 
     {
         switch (playerId)
