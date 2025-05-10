@@ -5,28 +5,40 @@ using UnityEngine;
 public class FoteljaAudioManager : AudioManager
 {
     [Header("Music")]
+    [SerializeField] private AudioClipSettings mainMenuMusic;
     [SerializeField] private AudioClipSettings musicStart;
     [SerializeField] private AudioClipSettings musicLoop;
 
     [Header("Sounds")]
     [SerializeField] private AudioClipSettings dash;
-    [SerializeField] private AudioClipSettings bubblePop;
-    [SerializeField] private AudioClipSettings unlockNewDepth;
-    [SerializeField] private AudioClipSettings enemyKill;
-    [SerializeField] private AudioClipSettings bossKill;
-    [SerializeField] private AudioClipSettings damageEnemy;
-    [SerializeField] private AudioClipSettings damageTaken;
-    [SerializeField] private AudioClipSettings whistle;
 
-    private bool _musicPlaying;
+    private bool mainMenuMusicPlaying;
+    private bool musicPlaying;
+
+    public void StartMainMenuMusic()
+    {
+        StopAudio(musicStart);
+        StopAudio(musicLoop);
+
+        musicPlaying = false;
+
+        if (!mainMenuMusicPlaying)
+        {
+            mainMenuMusicPlaying = true;
+            PlayAudio(mainMenuMusic);
+        }
+    }
 
     public void StartMusic()
     {
+        StopAudio(mainMenuMusic);
         StopAudio(musicLoop);
 
-        if (!_musicPlaying)
+        mainMenuMusicPlaying = false;
+
+        if (!musicPlaying)
         {
-            _musicPlaying = true;
+            musicPlaying = true;
             PlayAudio(musicStart);
             StartCoroutine(StartMusicLoop());
         }
@@ -41,16 +53,4 @@ public class FoteljaAudioManager : AudioManager
     }
 
     public void Dash() => PlayAudio(dash);
-
-    public void BubblePop() => PlayAudio(bubblePop);
-
-    public void UnlockNewDepth() => PlayAudio(unlockNewDepth);
-
-    public void EnemyKill() => PlayAudio(enemyKill);
-
-    public void BossKill() => PlayAudio(bossKill);
-
-    public void DamageEnemy() => PlayAudio(damageEnemy);
-
-    public void DamageTaken() => PlayAudio(damageTaken);
 }
