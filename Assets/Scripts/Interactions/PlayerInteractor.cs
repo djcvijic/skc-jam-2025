@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PlayerInteractor : MonoBehaviour
 {
-    private readonly float interactionRange = App.Instance.GameSettings.InteractionRange;
+    private float InteractionRange => App.Instance.GameSettings.InteractionRange;
     protected int playerId;
 
-    private void Update()
+    protected virtual void Update()
     {
     }
 }
