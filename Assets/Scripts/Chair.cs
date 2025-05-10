@@ -22,7 +22,7 @@ public class Chair : MonoBehaviour, IInteractable
 
     public void ShowInteract(bool show, int playerId)
     {
-        if (isInteracting) return;
+        if (isInteracting && show) return;
         
         outlineImage.gameObject.SetActive(show);
         outlineImage.color = App.Instance.GameSettings.GetPlayerColor(playerId);
@@ -54,6 +54,7 @@ public class Chair : MonoBehaviour, IInteractable
     public void InteractStart(InteractionType type, int playerId)
     {
         // start effect
+        // ParticleSystem.Instantiate();
 
 
         // start progress

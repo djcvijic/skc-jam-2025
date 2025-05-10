@@ -21,6 +21,7 @@ public class GameSettings : ScriptableObject
 
     public int NumberOfChairs = 8;
     public float MaxScoreFactor = 1.2f;
+    
     public int MaxPossibleScore => (int)((scratchPoints * MaxScratchAmount + pissPoints + shedPoints) * NumberOfChairs * MaxScoreFactor);
 
     public float TimePerGame => 300f;

@@ -1,28 +1,9 @@
 ﻿using UnityEngine;
 
-using System;
-
 public class Cat : PlayerInteractor
 {
     IInteractable interactingWith;
-    
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.TryGetComponent(out IInteractable interactable))
-        {
-            interactable.ShowInteract(true, playerId);
-            interactingWith = interactable;
-        }
-    }
 
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.TryGetComponent(out IInteractable interactable))
-        {
-            interactable.ShowInteract(false, playerId);
-            interactingWith = null;
-        }
-    }
     protected override void Update()
     {
         base.Update();
@@ -30,10 +11,22 @@ public class Cat : PlayerInteractor
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var chair = other.GetComponentInParent<Chair>();
-        if (chair != null)
+        var interactable = other.GetComponentInParent<Chair>();
+        if (interactable != null)
         {
-            Debug.Log($"Reached chair: {chair.gameObject.name}");
+            Debug.Log($"Reached interactable: {interactable.gameObject.name}");
+            interactable.ShowInteract(true, playerId);
+            interactingWith = interactable;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        var interactable = other.GetComponentInParent<Chair>();
+        if (interactable != null)
+        {
+            interactable.ShowInteract(false, playerId);
+            interactingWith = null;
         }
     }
 }
