@@ -9,12 +9,8 @@ public class App : MonoBehaviour
     public GameSettings GameSettings;
     public Prefabs Prefabs;
     
-    [field: SerializeField] public AppCanvas AppCanvas { get; private set; }
-    
     private void Awake()
     {
         Instance = this;
-        
-        AppCanvas.InitCanvas();
     }
 }
