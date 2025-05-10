@@ -1,6 +1,7 @@
 using System;
+using UnityEngine;
 
-public class Chair : IInteractable
+public class Chair : MonoBehaviour, IInteractable
 {
     private int linjPlayerId;
     private Tuple<int,int> scratch;
