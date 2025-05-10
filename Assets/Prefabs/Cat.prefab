@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587f24293add4842b63012b0bd8f5398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerId: 1
 --- !u!50 &2230677426166154681
 Rigidbody2D:
   serializedVersion: 4
@@ -252,6 +253,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8492e8f0-9a7d-4860-9f8d-3b70e0269237
     m_ActionName: PlayerActions/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2463068142501819982}
+        m_TargetAssemblyTypeName: Cat, Assembly-CSharp
+        m_MethodName: OnScratch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: eb2850f2-71c3-475e-bcdb-d67da42b1a8e
+    m_ActionName: PlayerActions/Scratch[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2463068142501819982}
+        m_TargetAssemblyTypeName: Cat, Assembly-CSharp
+        m_MethodName: OnPiss
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 31e4e707-4744-454a-be25-f22a22c3dad1
+    m_ActionName: PlayerActions/Piss[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2463068142501819982}
+        m_TargetAssemblyTypeName: Cat, Assembly-CSharp
+        m_MethodName: OnShed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b6d5a65d-5378-4b85-90d4-dba6e83f6c88
+    m_ActionName: PlayerActions/Shed[/Keyboard/3]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerActions
@@ -269,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9dfe5384186ee4b9f64f286e1780cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
 --- !u!1 &4861454463069665887
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +390,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1460959543
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e5bea23b037624e948b9c0590f47b3da, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
