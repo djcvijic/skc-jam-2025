@@ -1,16 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class App : MonoBehaviour
+public class App : MonoSingleton<App>
 {
-    public static App Instance;
     public GameSettings GameSettings;
     public Prefabs Prefabs;
     
     private void Awake()
     {
-        Instance = this;
+        EventsNotifier.Instance.ResetEvents();
     }
+
 }
