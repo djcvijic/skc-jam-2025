@@ -25,8 +25,6 @@ public class Chair : MonoBehaviour, IInteractable
 
         outlineImage.gameObject.SetActive(show);
         outlineImage.color = App.Instance.GameSettings.GetPlayerColor(playerId);
-
-        isInteracting = show;
     }
 
     public bool CanInteract(InteractionType type, int playerId)
@@ -52,6 +50,8 @@ public class Chair : MonoBehaviour, IInteractable
 
     public void InteractStart(InteractionType type, int playerId)
     {
+        isInteracting = true;
+
         // start effect
         // ParticleSystem.Instantiate();
 
@@ -98,6 +98,7 @@ public class Chair : MonoBehaviour, IInteractable
     public void InteractEnd(InteractionType type, int playerId)
     {
         Debug.Log("Interaction ended");
+        isInteracting = false;
         EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
         // update visuals
         progressBar.gameObject.SetActive(false);
