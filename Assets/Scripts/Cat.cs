@@ -44,6 +44,8 @@ public class Cat : PlayerInteractor
     {
         if (interactingWith is null) return;
 
+        if (!interactingWith.CanInteract(type, playerId)) return;
+        
         switch (context.phase)
         {
             case InputActionPhase.Started:
