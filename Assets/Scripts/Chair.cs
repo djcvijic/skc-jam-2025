@@ -7,7 +7,9 @@ public class Chair : MonoBehaviour, IInteractable
     [SerializeField] private Image pissImage;
     [SerializeField] private Image scratchImage;
     [SerializeField] private Image linjImage;
+    [SerializeField] private Image outlineImage;
 
+    private int pissPlayerId;
     private int linjPlayerId;
 
     /// <summary>
@@ -15,12 +17,23 @@ public class Chair : MonoBehaviour, IInteractable
     /// </summary>
     private Tuple<int, int> scratch;
 
-    private int pissPlayerId;
-
+    private bool isInteracting;
     private SimpleTimer actionTimer;
+
+    public void ShowInteract(bool show, int playerId)
+    {
+        if (isInteracting) return;
+        
+        outlineImage.gameObject.SetActive(show);
+        outlineImage.color = App.Instance.GameSettings.GetPlayerColor(playerId);
+        
+        isInteracting = show;
+    }
 
     public bool CanInteract(InteractionType type, int playerId)
     {
+        if (isInteracting) return false;
+        
         switch (type)
         {
             case InteractionType.Scrach:
@@ -33,8 +46,6 @@ public class Chair : MonoBehaviour, IInteractable
             case InteractionType.Linj:
                 if (linjPlayerId == playerId) return false;
                 break;
-            default:
-                return false;
         }
 
         return true;
