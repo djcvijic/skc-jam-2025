@@ -31,8 +31,6 @@ public class Chair : MonoBehaviour, IInteractable
 
     public bool CanInteract(InteractionType type, int playerId)
     {
-        if (isInteracting) return false;
-
         switch (type)
         {
             case InteractionType.Scratch:
@@ -43,7 +41,7 @@ public class Chair : MonoBehaviour, IInteractable
                 if (pissPlayerId == playerId) return false;
                 break;
             case InteractionType.Shed:
-                if (shedPlayerId == playerId) return false;
+                if (shedPlayerId == playerId || shedPlayerId != -1) return false;
                 break;
         }
 
