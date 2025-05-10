@@ -41,7 +41,7 @@ public class GameSettings : ScriptableObject
     {
         switch (type)
         {
-            case InteractionType.Scrach:
+            case InteractionType.Scratch:
                 return scratchDuration;
             case InteractionType.Piss:
                 return pissDuration;

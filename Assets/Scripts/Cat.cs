@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Cat : PlayerInteractor
 {
-    IInteractable interactingWith;
+    private IInteractable interactingWith;
 
-    protected override void Update()
-    {
-        base.Update();
-    }
+    public bool InMischief { get; private set; }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -27,6 +25,32 @@ public class Cat : PlayerInteractor
         {
             interactable.ShowInteract(false, playerId);
             interactingWith = null;
+        }
+    }
+
+    public void OnScratch(InputAction.CallbackContext context)
+        => OnInteraction(InteractionType.Scratch, context);
+
+    public void OnPiss(InputAction.CallbackContext context)
+        => OnInteraction(InteractionType.Piss, context);
+
+    public void OnShed(InputAction.CallbackContext context)
+        => OnInteraction(InteractionType.Shed, context);
+
+    private void OnInteraction(InteractionType type, InputAction.CallbackContext context)
+    {
+        if (InMischief || interactingWith is null) return;
+
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                InMischief = true;
+                interactingWith.InteractStart(type, playerId);
+                break;
+            case InputActionPhase.Canceled:
+                interactingWith.InteractEnd(type, playerId);
+                InMischief = false;
+                break;
         }
     }
 }

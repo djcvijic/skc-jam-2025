@@ -13,6 +13,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(moveInput * Time.deltaTime * moveSpeed);
+        transform.Translate(moveInput * (Time.deltaTime * moveSpeed));
     }
 }

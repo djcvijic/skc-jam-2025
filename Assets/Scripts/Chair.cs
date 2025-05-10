@@ -36,7 +36,7 @@ public class Chair : MonoBehaviour, IInteractable
         
         switch (type)
         {
-            case InteractionType.Scrach:
+            case InteractionType.Scratch:
                 if (scratch.PlayerId == playerId) return false;
                 if (scratch.ScratchAmount >= App.Instance.GameSettings.MaxScratchAmount) return false;
                 break;
@@ -65,7 +65,7 @@ public class Chair : MonoBehaviour, IInteractable
 
         switch (type)
         {
-            case InteractionType.Scrach:
+            case InteractionType.Scratch:
                 actionTimer.OnFinish += () => { Scratch(playerId); };
                 break;
             case InteractionType.Piss:
@@ -94,7 +94,7 @@ public class Chair : MonoBehaviour, IInteractable
         Color color = App.Instance.GameSettings.GetPlayerColor(playerId);
         switch (type)
         {
-            case InteractionType.Scrach:
+            case InteractionType.Scratch:
                 break;
             case InteractionType.Piss:
                 break;
