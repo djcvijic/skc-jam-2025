@@ -23,7 +23,7 @@ MonoBehaviour:
   shedPoints: 1
   MaxScratchAmount: 4
   NumberOfChairs: 8
-  MaxScoreFactor: 1.2
+  MaxScoreFactor: 0.4
   ThoughBubbleDisplayDuration: 2
   <CatAcceleration>k__BackingField: 100
   <CatMaxSpeed>k__BackingField: 20
