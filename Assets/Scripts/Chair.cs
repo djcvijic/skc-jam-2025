@@ -9,6 +9,7 @@ public class Chair : MonoBehaviour, IInteractable
     [SerializeField] private SpriteRenderer scratchImage;
     [SerializeField] private SpriteRenderer shedImage;
     [SerializeField] private SpriteRenderer outlineImage;
+    [SerializeField] private SpriteProgressBar progressBar;
 
     private int pissPlayerId;
     private int shedPlayerId;
@@ -22,18 +23,19 @@ public class Chair : MonoBehaviour, IInteractable
 
     public void ShowInteract(bool show, int playerId)
     {
+        if (!show) progressBar.gameObject.SetActive(false);
         if (isInteracting && show) return;
-        
+
         outlineImage.gameObject.SetActive(show);
         outlineImage.color = App.Instance.GameSettings.GetPlayerColor(playerId);
-        
+
         isInteracting = show;
     }
 
     public bool CanInteract(InteractionType type, int playerId)
     {
         if (isInteracting) return false;
-        
+
         switch (type)
         {
             case InteractionType.Scratch:
@@ -56,12 +58,12 @@ public class Chair : MonoBehaviour, IInteractable
         // start effect
         // ParticleSystem.Instantiate();
 
-
         // start progress
         Destroy(actionTimer);
 
         actionTimer = gameObject.AddComponent<SimpleTimer>();
         actionTimer.Begin(App.Instance.GameSettings.GetActionDuration(type));
+        actionTimer.OnTick += (progress) => { progressBar.SetProgress(progress); };
 
         switch (type)
         {
@@ -77,6 +79,8 @@ public class Chair : MonoBehaviour, IInteractable
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
+
+        progressBar.gameObject.SetActive(true);
     }
 
     private void Scratch(int playerId)
@@ -87,6 +91,7 @@ public class Chair : MonoBehaviour, IInteractable
     public void InteractEnd(InteractionType type, int playerId)
     {
         // update visuals
+        progressBar.gameObject.SetActive(false);
     }
 
     private void UpdateVisuals(InteractionType type, int playerId)

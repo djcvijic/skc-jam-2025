@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class SimpleTimer : MonoBehaviour
 {
-    public int timeRemaining;
+    public float timeRemaining;
+    public int duration;
     public bool isCountingDown = false;
-    public Action OnTick;
+    public Action<float> OnTick;
     public Action OnFinish;
 
     public void Begin(int duration)
@@ -13,25 +14,27 @@ public class SimpleTimer : MonoBehaviour
         if (!isCountingDown)
         {
             isCountingDown = true;
+            this.duration = duration;
             timeRemaining = duration;
-            Invoke("Tick", 1f);
+            Invoke("Tick", 0.2f);
         }
     }
 
     private void Tick()
     {
-        timeRemaining--;
+        timeRemaining -= 0.2f;
         if (timeRemaining > 0)
         {
-            Invoke("Tick", 1f);
+            Invoke("Tick", 0.2f);
         }
         else
         {
             isCountingDown = false;
             OnFinish?.Invoke();
+            Debug.Log("Moze FINISH");
             return;
         }
 
-        OnTick?.Invoke();
+        OnTick?.Invoke(((float)duration - (float)timeRemaining) / (float)duration);
     }
 }
