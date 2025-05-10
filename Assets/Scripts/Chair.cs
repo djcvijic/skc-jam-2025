@@ -1,7 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class Chair : MonoBehaviour, IInteractable
 {
@@ -11,8 +8,8 @@ public class Chair : MonoBehaviour, IInteractable
     [SerializeField] private SpriteRenderer outlineImage;
     [SerializeField] private SpriteProgressBar progressBar;
 
-    private int pissPlayerId;
-    private int shedPlayerId;
+    private int pissPlayerId = -1;
+    private int shedPlayerId = -1;
 
     private record ScratchData(int PlayerId, int ScratchAmount);
 
@@ -68,16 +65,26 @@ public class Chair : MonoBehaviour, IInteractable
         switch (type)
         {
             case InteractionType.Scratch:
-                actionTimer.OnFinish += () => { Scratch(playerId); };
+                actionTimer.OnFinish += () =>
+                {
+                    Scratch(playerId);
+                    UpdateVisuals(InteractionType.Scratch, playerId);
+                };
                 break;
             case InteractionType.Piss:
-                actionTimer.OnFinish += () => { pissPlayerId = playerId; };
+                actionTimer.OnFinish += () =>
+                {
+                    pissPlayerId = playerId;
+                    UpdateVisuals(InteractionType.Piss, playerId);
+                };
                 break;
             case InteractionType.Shed:
-                actionTimer.OnFinish += () => { shedPlayerId = playerId; };
+                actionTimer.OnFinish += () =>
+                {
+                    shedPlayerId = playerId;
+                    UpdateVisuals(InteractionType.Shed, playerId);
+                };
                 break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
 
         progressBar.gameObject.SetActive(true);
@@ -100,13 +107,17 @@ public class Chair : MonoBehaviour, IInteractable
         switch (type)
         {
             case InteractionType.Scratch:
+                scratchImage.gameObject.SetActive(true);
+                scratchImage.color = color;
                 break;
             case InteractionType.Piss:
+                pissImage.gameObject.SetActive(true);
+                pissImage.color = color;
                 break;
             case InteractionType.Shed:
+                shedImage.gameObject.SetActive(true);
+                shedImage.color = color;
                 break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
     }
 }
