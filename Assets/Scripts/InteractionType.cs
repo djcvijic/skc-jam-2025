@@ -1,6 +1,6 @@
 ﻿public enum InteractionType
 {
-    Scrach,
+    Scratch,
     Piss,
     Shed
 }

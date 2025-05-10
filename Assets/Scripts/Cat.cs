@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
-
-using System;
+using UnityEngine.InputSystem;
 
 public class Cat : PlayerInteractor
 {
-    IInteractable interactingWith;
-    
+    private IInteractable interactingWith;
+
+    public bool InMischief { get; private set; }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.TryGetComponent(out IInteractable interactable))
         {
+            Debug.Log($"Reached interactable: {interactable.gameObject.name}");
             interactable.ShowInteract(true, playerId);
             interactingWith = interactable;
         }
@@ -23,17 +25,30 @@ public class Cat : PlayerInteractor
             interactingWith = null;
         }
     }
-    protected override void Update()
-    {
-        base.Update();
-    }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnScratch(InputAction.CallbackContext context)
+        => OnInteraction(InteractionType.Scratch, context);
+
+    public void OnPiss(InputAction.CallbackContext context)
+        => OnInteraction(InteractionType.Piss, context);
+
+    public void OnShed(InputAction.CallbackContext context)
+        => OnInteraction(InteractionType.Shed, context);
+
+    private void OnInteraction(InteractionType type, InputAction.CallbackContext context)
     {
-        var chair = other.GetComponentInParent<Chair>();
-        if (chair != null)
+        if (InMischief || interactingWith is null) return;
+
+        switch (context.phase)
         {
-            Debug.Log($"Reached chair: {chair.gameObject.name}");
+            case InputActionPhase.Started:
+                InMischief = true;
+                interactingWith.InteractStart(type, playerId);
+                break;
+            case InputActionPhase.Canceled:
+                interactingWith.InteractEnd(type, playerId);
+                InMischief = false;
+                break;
         }
     }
 }

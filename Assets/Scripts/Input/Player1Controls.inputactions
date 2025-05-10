@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "Player1Controls",
     "maps": [
         {
             "name": "PlayerActions",
@@ -13,6 +13,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Scratch",
+                    "type": "Button",
+                    "id": "eb2850f2-71c3-475e-bcdb-d67da42b1a8e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Piss",
+                    "type": "Button",
+                    "id": "31e4e707-4744-454a-be25-f22a22c3dad1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shed",
+                    "type": "Button",
+                    "id": "b6d5a65d-5378-4b85-90d4-dba6e83f6c88",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -70,6 +97,39 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "a1065017-8fb5-4f24-bd49-6be9d0253fc6",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scratch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "951473aa-d99f-42af-a3a0-ef27478cd657",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Piss",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c0c582b-8401-431a-8725-3618b019895d",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
