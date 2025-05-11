@@ -39,10 +39,10 @@ public class PlayerScoreBar : MonoBehaviour
     public void OnScoreChanged(int newScore)
     {
         if (lerpRoutine != null)
+        {
             StopCoroutine(lerpRoutine);
-
-        if (lerpRoutine != null)
-            StopCoroutine(lerpRoutine);
+            lerpRoutine = null;
+        }
         
         lerpRoutine = StartCoroutine(LerpScore(newScore));
         currentScore = newScore;
