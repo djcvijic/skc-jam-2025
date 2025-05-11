@@ -28,6 +28,7 @@ public class MainMenu : MonoBehaviour
 
     private void OnInstructionsButtonClicked()
     {
+        App.Instance.AudioManager.ButtonClick();
         ToggleInstructionsPanel();
     }
 
@@ -59,14 +60,14 @@ public class MainMenu : MonoBehaviour
 
     private void ToggleSettingsPanel()
     {
-        SidePanel.SetActive(true);
+        SidePanel.SetActive(!SettingsMenu.IsShowing);
         CreditsMenu.Hide();
         InstructionsMenu.SetActive(false);
         SettingsMenu.Show();
     }
     private void ToggleCreditsPanel()
     {
-        SidePanel.SetActive(true);
+        SidePanel.SetActive(!CreditsMenu.IsShowing);
         SettingsMenu.Hide();
         InstructionsMenu.SetActive(false);
         CreditsMenu.Show();
@@ -74,7 +75,7 @@ public class MainMenu : MonoBehaviour
     
     private void ToggleInstructionsPanel()
     {
-        SidePanel.SetActive(true);
+        SidePanel.SetActive(!InstructionsMenu.activeInHierarchy);
         InstructionsMenu.SetActive(true);
         SettingsMenu.Hide();
         CreditsMenu.Hide();
