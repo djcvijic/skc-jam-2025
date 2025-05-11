@@ -101,11 +101,12 @@ public class Cat : MonoBehaviour
     private IEnumerator BeStunned()
     {
         sprite.localScale = upsideDown;
+        App.Instance.AudioManager.CatFight();
 
         var stunDuration = App.Instance.GameSettings.StunDuration;
         yield return new WaitForSeconds(stunDuration);
 
-        stunnedCoroutine = null;
         sprite.localScale = Vector3.one;
+        stunnedCoroutine = null;
     }
 }
