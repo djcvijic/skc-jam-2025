@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: Assembly-CSharp::GameSettings
   InteractionRange: 2
-  Player1Color: {r: 1, g: 0, b: 0, a: 1}
+  Player1Color: {r: 1, g: 1, b: 1, a: 1}
   Player2Color: {r: 0, g: 0, b: 0, a: 1}
   scratchDuration: 5
   pissDuration: 5
