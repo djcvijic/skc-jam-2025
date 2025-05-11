@@ -27,11 +27,11 @@ public class PlayerController : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
         if (moveInput != Vector2.zero)
         {
-            App.Instance.Notifier.TriggerAnimationChange("CatWalk", playerId);
+            App.Instance.Notifier.TriggerAnimationChange("Cat" + playerId + "Walk", playerId);
         }
         else
         {
-            App.Instance.Notifier.TriggerAnimationChange("CatIdle", playerId);
+            App.Instance.Notifier.TriggerAnimationChange("Cat" + playerId + "Idle", playerId);
         }
 
         if (moveInput.x > 0)
