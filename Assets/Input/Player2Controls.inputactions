@@ -17,7 +17,7 @@
                 {
                     "name": "Scratch",
                     "type": "Button",
-                    "id": "77441930-8035-4518-a4a0-8259bbd7c0a6",
+                    "id": "eb2850f2-71c3-475e-bcdb-d67da42b1a8e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
@@ -26,7 +26,7 @@
                 {
                     "name": "Piss",
                     "type": "Button",
-                    "id": "b564e70b-96df-44d6-90a9-267c2d68e24b",
+                    "id": "31e4e707-4744-454a-be25-f22a22c3dad1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
@@ -35,7 +35,7 @@
                 {
                     "name": "Shed",
                     "type": "Button",
-                    "id": "8a4c4ee7-6416-4cbe-8d62-b0eb5a04ffef",
+                    "id": "b6d5a65d-5378-4b85-90d4-dba6e83f6c88",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
