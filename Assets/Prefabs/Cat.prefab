@@ -607,8 +607,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 1
-  thoughtBubble: {fileID: 4149407469222361590, guid: 6eb106dd1eb7f074baba4926894f1258, type: 3}
   animator: {fileID: 4479312006706218300}
+  thoughtBubble: {fileID: 4149407469222361590, guid: 6eb106dd1eb7f074baba4926894f1258, type: 3}
+  sprite: {fileID: 7918009430379734228}
 --- !u!50 &2230677426166154681
 Rigidbody2D:
   serializedVersion: 4
@@ -742,6 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9dfe5384186ee4b9f64f286e1780cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerId: 0
 --- !u!95 &4479312006706218300
 Animator:
   serializedVersion: 5
