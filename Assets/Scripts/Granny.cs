@@ -128,4 +128,50 @@ public class Granny : MonoBehaviour
             StartCoroutine(MoveThroughWaypoints(reversedWaypoints, currentWaypoint));
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (closestCat != null && closestCat.InMischief)
+        {
+            var interactable = other.GetComponentInParent<Cat>();
+            if (interactable != null)
+            {
+                if (interactable.InMischief)
+                {
+                    App.Instance.Notifier.TriggerGrannyFight(true);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        var interactable = other.GetComponentInParent<Cat>();
+        if (interactable != null)
+        {
+            App.Instance.Notifier.TriggerGrannyFight(false);
+        }
+    }
+    
+    private void OnEnable()
+    {
+        App.Instance.Notifier.GrannyAttack += HandleGrannyAttack;
+    }
+
+    private void OnDisable()
+    {
+        App.Instance.Notifier.GrannyAttack -= HandleGrannyAttack;
+    }
+
+    private void HandleGrannyAttack(bool fight)
+    {
+        if (fight)
+        {
+            animator.Play("GrannyAttack");
+        }
+        else
+        {
+            animator.Play("GrannyWalk");
+        }
+    }
 }
