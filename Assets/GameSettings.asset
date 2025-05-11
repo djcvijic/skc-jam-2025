@@ -28,3 +28,9 @@ MonoBehaviour:
   <CatAcceleration>k__BackingField: 100
   <CatMaxSpeed>k__BackingField: 20
   <CatFriction>k__BackingField: 20
+  Piss1: {fileID: 21300000, guid: 4ef38a79f230db9428162a7231049039, type: 3}
+  Piss2: {fileID: 21300000, guid: a259bfc79a2724bee9d0cfc7197b779b, type: 3}
+  Scratch1: {fileID: 21300000, guid: 34e665dea93660e4e8099300f80e380b, type: 3}
+  Scratch2: {fileID: 21300000, guid: 2c48cf5f2e9f5604a8a711b482b1c5f3, type: 3}
+  Shed1: {fileID: 21300000, guid: 232f28ecb02834b6b80571442a32389a, type: 3}
+  Shed2: {fileID: 21300000, guid: e523e974712814be680bee8429f92ba4, type: 3}

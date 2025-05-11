@@ -104,20 +104,20 @@ public class Chair : MonoBehaviour, IInteractable
 
     private void UpdateVisuals(InteractionType type, int playerId)
     {
-        Color color = App.Instance.GameSettings.GetPlayerColor(playerId);
+        Sprite actionSprite = App.Instance.GameSettings.GetPlayerActionSprite(type, playerId);
         switch (type)
         {
             case InteractionType.Scratch:
                 scratchImage.gameObject.SetActive(true);
-                scratchImage.color = color;
+                scratchImage.sprite = actionSprite;
                 break;
             case InteractionType.Piss:
                 pissImage.gameObject.SetActive(true);
-                pissImage.color = color;
+                pissImage.sprite = actionSprite;
                 break;
             case InteractionType.Shed:
                 shedImage.gameObject.SetActive(true);
-                shedImage.color = color;
+                shedImage.sprite = actionSprite;
                 break;
         }
     }
