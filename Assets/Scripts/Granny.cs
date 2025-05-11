@@ -41,7 +41,7 @@ public class Granny : MonoBehaviour
 
         foreach (var cat in cats)
         {
-            if (!cat.InMischief) return cat;
+            if (!cat.InMischief) continue;
             var distance = Vector3.Distance(cat.transform.position, transform.position);
             if (distance <= closestDistance)
             {

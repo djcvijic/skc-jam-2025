@@ -86,6 +86,12 @@ public class Chair : MonoBehaviour, IInteractable
         }
 
         UpdateVisuals(type, playerId);
+        
+        Destroy(actionTimer);
+        Destroy(currectParticle);
+        isInteracting = false;
+        progressBar.gameObject.SetActive(false);
+        
         App.Instance.AudioManager.FinishInteraction(type);
     }
 
