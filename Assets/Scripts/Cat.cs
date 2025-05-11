@@ -54,11 +54,42 @@ public class Cat : PlayerInteractor
 
                 Debug.Log($"Player {playerId} started {type.ToString()} on {interactingWith.gameObject.name}");
                 interactingWith.InteractStart(type, playerId);
+                switch (type)
+                {
+                    case InteractionType.Scratch:
+                        CatAnimationEventManager.TriggerAnimationChange("CatScratch", playerId);
+                        break;
+                    case InteractionType.Piss:
+                        CatAnimationEventManager.TriggerAnimationChange("CatPiss", playerId);
+                        break;
+                    case InteractionType.Shed:
+                        CatAnimationEventManager.TriggerAnimationChange("CatShed", playerId);
+                        break;
+                }
                 break;
             case InputActionPhase.Canceled:
                 Debug.Log($"Player {playerId} canceled {type.ToString()} on {interactingWith.gameObject.name}");
                 interactingWith.InteractCancel(type, playerId);
+                CatAnimationEventManager.TriggerAnimationChange("CatIdle", playerId);
                 break;
+        }
+    }
+    
+    private void OnEnable()
+    {
+        CatAnimationEventManager.OnAnimationChange += HandleAnimationChange;
+    }
+
+    private void OnDisable()
+    {
+        CatAnimationEventManager.OnAnimationChange -= HandleAnimationChange;
+    }
+
+    private void HandleAnimationChange(string animationName, int id)
+    {
+        if (id == playerId)
+        {
+            animator.Play(animationName);
         }
     }
 }

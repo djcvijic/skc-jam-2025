@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Cat _cat;
     private Rigidbody2D _rb;
     private Vector2 moveInput;
+    [SerializeField] private int playerId;
 
     private float Acceleration => App.Instance.GameSettings.CatAcceleration;
     private float MaxSpeed => App.Instance.GameSettings.CatMaxSpeed;
@@ -23,6 +25,23 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+        if (moveInput != Vector2.zero)
+        {
+            CatAnimationEventManager.TriggerAnimationChange("CatWalk", playerId);
+        }
+        else
+        {
+            CatAnimationEventManager.TriggerAnimationChange("CatIdle", playerId);
+        }
+
+        if (moveInput.x > 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (moveInput.x < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     private void Update()
