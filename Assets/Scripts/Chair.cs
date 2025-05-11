@@ -36,12 +36,15 @@ public class Chair : MonoBehaviour, IInteractable
             case InteractionType.Scratch:
                 if (scratch.PlayerId == playerId) return false;
                 if (scratch.ScratchAmount >= App.Instance.GameSettings.MaxScratchAmount) return false;
+                App.Instance.Notifier.TriggerAnimationChange("CatScratch", playerId);
                 break;
             case InteractionType.Piss:
                 if (pissPlayerId == playerId) return false;
+                App.Instance.Notifier.TriggerAnimationChange("CatPiss", playerId);
                 break;
             case InteractionType.Shed:
                 if (shedPlayerId == playerId || shedPlayerId != -1) return false;
+                App.Instance.Notifier.TriggerAnimationChange("CatShed", playerId);
                 break;
         }
 
@@ -93,6 +96,7 @@ public class Chair : MonoBehaviour, IInteractable
         progressBar.gameObject.SetActive(false);
         App.Instance.Notifier.NotifyInteractionEnded(type, playerId);
         
+        App.Instance.Notifier.TriggerAnimationChange("CatIdle", playerId);
         App.Instance.AudioManager.FinishInteraction(type);
     }
 
@@ -104,6 +108,8 @@ public class Chair : MonoBehaviour, IInteractable
         isInteracting = false;
         // update visuals
         progressBar.gameObject.SetActive(false);
+        
+        App.Instance.Notifier.TriggerAnimationChange("CatIdle", playerId);
         App.Instance.AudioManager.FinishInteraction(type);
     }
 

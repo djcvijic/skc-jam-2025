@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMove()
     {
-        if (_cat.InMischief) return;
+        if (_cat.InMischief || _cat.IsStunned) return;
 
         Vector3 force = (Vector3)moveInput * Acceleration;
         _rb.AddForce(force * Time.deltaTime);
