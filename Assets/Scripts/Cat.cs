@@ -89,16 +89,19 @@ public class Cat : MonoBehaviour
         App.Instance.Notifier.GrannyAttack -= HandleGrannyAttack;
     }
 
-    private void HandleAnimationChange(string animationName, int id)
+    private void HandleAnimationChange(string animationName, int pid)
     {
-        if (id == playerId)
-        {
-            animator.Play(animationName);
-        }
+        if (pid != playerId) return;
+
+        if (IsStunned) return;
+
+        animator.Play(animationName);
     }
 
-    private void HandleGrannyAttack(bool started)
+    private void HandleGrannyAttack(int pid, bool started)
     {
+        if (pid != playerId) return;
+
         if (!started) return;
 
         if (stunnedCoroutine != null)
