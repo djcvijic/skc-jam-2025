@@ -1,14 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Cat : PlayerInteractor
+public class Cat : MonoBehaviour
 {
+    public int playerId;
+    [SerializeField] Animator animator;
     [SerializeField] private ThoughtBubble thoughtBubble;
     
     private IInteractable interactingWith;
 
     public bool InMischief => interactingWith is { isInteracting: true };
-    [SerializeField] Animator animator;
+
+    private Coroutine stunnedCoroutine;
+    
+    public bool IsStunned => stunnedCoroutine != null;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -79,5 +85,21 @@ public class Cat : PlayerInteractor
         {
             animator.Play(animationName);
         }
+    }
+
+    public void Stun()
+    {
+        if (stunnedCoroutine != null)
+            StopCoroutine(stunnedCoroutine);
+
+        stunnedCoroutine = StartCoroutine(BeStunned());
+    }
+
+    private IEnumerator BeStunned()
+    {
+        var stunDuration = App.Instance.GameSettings.StunDuration;
+        yield return new WaitForSeconds(stunDuration);
+
+        stunnedCoroutine = null;
     }
 }
