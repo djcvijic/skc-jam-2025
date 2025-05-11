@@ -91,7 +91,7 @@ public class Chair : MonoBehaviour, IInteractable
         Destroy(currectParticle);
         isInteracting = false;
         progressBar.gameObject.SetActive(false);
-        EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
+        App.Instance.Notifier.NotifyInteractionEnded(type, playerId);
         
         App.Instance.AudioManager.FinishInteraction(type);
     }

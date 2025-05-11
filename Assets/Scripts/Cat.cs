@@ -58,32 +58,32 @@ public class Cat : PlayerInteractor
                 switch (type)
                 {
                     case InteractionType.Scratch:
-                        CatAnimationEventManager.TriggerAnimationChange("CatScratch", playerId);
+                        App.Instance.Notifier.TriggerAnimationChange("CatScratch", playerId);
                         break;
                     case InteractionType.Piss:
-                        CatAnimationEventManager.TriggerAnimationChange("CatPiss", playerId);
+                        App.Instance.Notifier.TriggerAnimationChange("CatPiss", playerId);
                         break;
                     case InteractionType.Shed:
-                        CatAnimationEventManager.TriggerAnimationChange("CatShed", playerId);
+                        App.Instance.Notifier.TriggerAnimationChange("CatShed", playerId);
                         break;
                 }
                 break;
             case InputActionPhase.Canceled:
                 Debug.Log($"Player {playerId} canceled {type.ToString()} on {interactingWith.gameObject.name}");
                 interactingWith.InteractCancel(type, playerId);
-                CatAnimationEventManager.TriggerAnimationChange("CatIdle", playerId);
+                App.Instance.Notifier.TriggerAnimationChange("CatIdle", playerId);
                 break;
         }
     }
     
     private void OnEnable()
     {
-        CatAnimationEventManager.OnAnimationChange += HandleAnimationChange;
+        App.Instance.Notifier.OnAnimationChange += HandleAnimationChange;
     }
 
     private void OnDisable()
     {
-        CatAnimationEventManager.OnAnimationChange -= HandleAnimationChange;
+        App.Instance.Notifier.OnAnimationChange -= HandleAnimationChange;
     }
 
     private void HandleAnimationChange(string animationName, int id)
