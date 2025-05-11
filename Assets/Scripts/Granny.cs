@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Granny : MonoBehaviour
 {
+    [SerializeField] private Collider2D catchCollider;
     [SerializeField] private Cat closestCat;
 
     [SerializeField] private List<Transform> waypoints;

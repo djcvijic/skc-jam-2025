@@ -2,9 +2,9 @@
 
 public class EventsNotifier
 {
-    public Action<InteractionType, int> OnInteractionEnded;
-    public Action OnGameOverTimerFinished;
-    public Action<string, int> OnAnimationChange;
+    public event Action<InteractionType, int> OnInteractionEnded;
+    public event Action OnGameOverTimerFinished;
+    public event Action<string, int> OnAnimationChange;
 
     public void NotifyInteractionEnded(InteractionType interactionType, int playerId)
         => OnInteractionEnded?.Invoke(interactionType, playerId);
@@ -13,7 +13,7 @@ public class EventsNotifier
         => OnGameOverTimerFinished?.Invoke();
 
     public void TriggerAnimationChange(string animationName, int playerId)
-        => OnAnimationChange.Invoke(animationName, playerId);
+        => OnAnimationChange?.Invoke(animationName, playerId);
 
     public void ResetEvents()
     {
