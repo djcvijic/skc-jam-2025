@@ -10,10 +10,12 @@ public class PlayerScoreBar : MonoBehaviour
     [SerializeField] private Slider playerScoreSlider;
     [SerializeField] private Image playerIcon;
     [SerializeField] private float lerpDuration = 0.5f;
-    [SerializeField] private int playerId = 1;
+    public int playerId = 1;
     
     private Coroutine lerpRoutine;
     private List<Chair> chairs;
+
+    private int currentScore;
 
     private void Start()
     {
@@ -43,6 +45,7 @@ public class PlayerScoreBar : MonoBehaviour
             StopCoroutine(lerpRoutine);
         
         lerpRoutine = StartCoroutine(LerpScore(newScore));
+        currentScore = newScore;
     }
 
     private IEnumerator LerpScore(int targetScore)
@@ -60,5 +63,11 @@ public class PlayerScoreBar : MonoBehaviour
 
         playerScoreSlider.value = targetScore;
         lerpRoutine = null;
+    }
+
+    public int GetCurrentScore()
+    {
+        return currentScore;
+
     }
 }

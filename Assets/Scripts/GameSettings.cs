@@ -36,7 +36,7 @@ public class GameSettings : ScriptableObject
     public Sprite Shed1;
     public Sprite Shed2;
 
-    public float TimePerGame => 300f;
+    public float TimePerGame = 300f;
 
     public Color GetPlayerColor(int playerId) 
     {
