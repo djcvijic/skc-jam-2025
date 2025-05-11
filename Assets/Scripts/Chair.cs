@@ -96,6 +96,7 @@ public class Chair : MonoBehaviour, IInteractable
     public void InteractEnd(InteractionType type, int playerId)
     {
         Debug.Log("Interaction ended");
+        Destroy(actionTimer);
         isInteracting = false;
         EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
         // update visuals

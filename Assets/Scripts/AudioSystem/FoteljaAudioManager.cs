@@ -13,14 +13,14 @@ public class FoteljaAudioManager : AudioManager
     [SerializeField] private AudioClipSettings dash;
 
     private bool mainMenuMusicPlaying;
-    private bool musicPlaying;
+    private bool levelMusicPlaying;
 
     public void StartMainMenuMusic()
     {
         StopAudio(musicStart);
         StopAudio(musicLoop);
 
-        musicPlaying = false;
+        levelMusicPlaying = false;
 
         if (!mainMenuMusicPlaying)
         {
@@ -29,22 +29,22 @@ public class FoteljaAudioManager : AudioManager
         }
     }
 
-    public void StartMusic()
+    public void StartLevelMusic()
     {
         StopAudio(mainMenuMusic);
         StopAudio(musicLoop);
 
         mainMenuMusicPlaying = false;
 
-        if (!musicPlaying)
+        if (!levelMusicPlaying)
         {
-            musicPlaying = true;
+            levelMusicPlaying = true;
             PlayAudio(musicStart);
-            StartCoroutine(StartMusicLoop());
+            StartCoroutine(StartLevelMusicLoop());
         }
     }
 
-    private IEnumerator StartMusicLoop()
+    private IEnumerator StartLevelMusicLoop()
     {
         yield return new WaitForSeconds(musicStart.Variants[0].length);
 
