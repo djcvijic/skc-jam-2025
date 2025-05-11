@@ -16,13 +16,14 @@ public class EventsNotifier
     public void TriggerAnimationChange(string animationName, int playerId)
         => OnAnimationChange?.Invoke(animationName, playerId);
 
-    public void TriggerGrannyFight(bool fight)
-        => GrannyAttack?.Invoke(fight);
+    public void TriggerGrannyFight(bool started)
+        => GrannyAttack?.Invoke(started);
 
     public void ResetEvents()
     {
         OnInteractionEnded = null;
         OnGameOverTimerFinished = null;
         OnAnimationChange = null;
+        GrannyAttack = null;
     }
 }

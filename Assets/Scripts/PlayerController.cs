@@ -59,4 +59,9 @@ public class PlayerController : MonoBehaviour
         if (_rb.velocity.magnitude > MaxSpeed)
             _rb.velocity = _rb.velocity.normalized * MaxSpeed;
     }
+
+    public void CancelInteraction()
+    {
+        throw new System.NotImplementedException();
+    }
 }

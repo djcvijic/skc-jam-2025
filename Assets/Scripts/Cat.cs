@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class Cat : MonoBehaviour
     private readonly Vector3 upsideDown = new(1, -1, 1);
     
     private IInteractable interactingWith;
+    private InteractionType currentInteractionType;
 
     public bool InMischief => interactingWith is { isInteracting: true };
 
@@ -51,6 +53,8 @@ public class Cat : MonoBehaviour
 
     private void OnInteraction(InteractionType type, InputAction.CallbackContext context)
     {
+        if (IsStunned) return;
+
         if (interactingWith is null) return;
 
         if (!interactingWith.CanInteract(type, playerId)) return;
@@ -64,6 +68,7 @@ public class Cat : MonoBehaviour
 
                 Debug.Log($"Player {playerId} started {type.ToString()} on {interactingWith.gameObject.name}");
                 interactingWith.InteractStart(type, playerId);
+                currentInteractionType = type;
                 break;
             case InputActionPhase.Canceled:
                 Debug.Log($"Player {playerId} canceled {type.ToString()} on {interactingWith.gameObject.name}");
@@ -75,11 +80,13 @@ public class Cat : MonoBehaviour
     private void OnEnable()
     {
         App.Instance.Notifier.OnAnimationChange += HandleAnimationChange;
+        App.Instance.Notifier.GrannyAttack += HandleGrannyAttack;
     }
 
     private void OnDisable()
     {
         App.Instance.Notifier.OnAnimationChange -= HandleAnimationChange;
+        App.Instance.Notifier.GrannyAttack -= HandleGrannyAttack;
     }
 
     private void HandleAnimationChange(string animationName, int id)
@@ -90,16 +97,19 @@ public class Cat : MonoBehaviour
         }
     }
 
-    public void Stun()
+    private void HandleGrannyAttack(bool started)
     {
+        if (!started) return;
+
         if (stunnedCoroutine != null)
             StopCoroutine(stunnedCoroutine);
 
-        stunnedCoroutine = StartCoroutine(BeStunned());
+        stunnedCoroutine = StartCoroutine(Stun());
     }
 
-    private IEnumerator BeStunned()
+    private IEnumerator Stun()
     {
+        interactingWith?.InteractCancel(currentInteractionType, playerId);
         sprite.localScale = upsideDown;
         App.Instance.AudioManager.CatFight();
 
