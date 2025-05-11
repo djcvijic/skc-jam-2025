@@ -59,9 +59,4 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
     }
-
-    public void CancelInteraction()
-    {
-        throw new System.NotImplementedException();
-    }
 }
