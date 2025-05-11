@@ -34,6 +34,6 @@ MonoBehaviour:
   Scratch2: {fileID: 21300000, guid: 2c48cf5f2e9f5604a8a711b482b1c5f3, type: 3}
   Shed1: {fileID: 21300000, guid: 232f28ecb02834b6b80571442a32389a, type: 3}
   Shed2: {fileID: 21300000, guid: e523e974712814be680bee8429f92ba4, type: 3}
-  pissEffect: {fileID: 0}
-  scratchEffect: {fileID: 7752220593077138427, guid: e7a96f99a506dba40929bd62dd628dd4, type: 3}
-  shedEffect: {fileID: 0}
+  pissEffect: {fileID: 2208398248171106187, guid: 141502cfd7341c243bfb6e1889b14664, type: 3}
+  scratchEffect: {fileID: 7430072158196497426, guid: 1f19413c92c2dfa40b55584426962f3d, type: 3}
+  shedEffect: {fileID: 6511999817825407053, guid: fe1103e765b6e64438bd21387462db15, type: 3}

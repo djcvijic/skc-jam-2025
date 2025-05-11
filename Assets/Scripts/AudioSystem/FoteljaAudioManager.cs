@@ -1,16 +1,21 @@
+using System;
 using System.Collections;
 using Audio;
 using UnityEngine;
 
 public class FoteljaAudioManager : AudioManager
 {
-    [Header("Music")]
-    [SerializeField] private AudioClipSettings mainMenuMusic;
+    [Header("Music")] [SerializeField] private AudioClipSettings mainMenuMusic;
     [SerializeField] private AudioClipSettings musicStart;
     [SerializeField] private AudioClipSettings musicLoop;
 
-    [Header("Sounds")]
-    [SerializeField] private AudioClipSettings dash;
+    [Header("Sounds")] [SerializeField] private AudioClipSettings catFight;
+    [SerializeField] private AudioClipSettings loseSound;
+    [SerializeField] private AudioClipSettings meow;
+    [SerializeField] private AudioClipSettings pee;
+    [SerializeField] private AudioClipSettings scratch;
+    [SerializeField] private AudioClipSettings shedding;
+    [SerializeField] private AudioClipSettings winSound;
 
     private bool mainMenuMusicPlaying;
     private bool levelMusicPlaying;
@@ -52,5 +57,32 @@ public class FoteljaAudioManager : AudioManager
         PlayAudio(musicLoop);
     }
 
-    public void Dash() => PlayAudio(dash);
+    public void CatFight() => PlayAudio(catFight);
+
+    public void LoseSound() => PlayAudio(loseSound);
+
+    public void WinSound() => PlayAudio(winSound);
+
+    public void StartInteraction(InteractionType type)
+    {
+        PlayAudio(meow);
+        PlayAudio(type switch
+        {
+            InteractionType.Scratch => scratch,
+            InteractionType.Piss => pee,
+            InteractionType.Shed => shedding,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        });
+    }
+
+    public void FinishInteraction(InteractionType type)
+    {
+        StopAudio(type switch
+        {
+            InteractionType.Scratch => scratch,
+            InteractionType.Piss => pee,
+            InteractionType.Shed => shedding,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        });
+    }
 }
