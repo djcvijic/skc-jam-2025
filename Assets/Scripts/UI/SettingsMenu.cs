@@ -25,12 +25,14 @@ public class SettingsMenu : MonoBehaviour
     private void OnMuteSfxToggled(bool isMuted)
     {
         Debug.Log("SFX Muted: " + isMuted);
+        App.Instance.AudioManager.ButtonClick();
         // Example: AudioManager.Instance.SetSfxMuted(isMuted);
     }
 
     private void OnMuteMusicToggled(bool isMuted)
     {
         Debug.Log("Music Muted: " + isMuted);
+        App.Instance.AudioManager.ButtonClick();
         // Example: AudioManager.Instance.SetMusicMuted(isMuted);
     }
 }
