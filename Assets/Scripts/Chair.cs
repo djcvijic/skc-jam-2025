@@ -16,7 +16,7 @@ public class Chair : MonoBehaviour, IInteractable
 
     private ScratchData scratch = new(0, 0);
 
-    private bool isInteracting;
+    public bool isInteracting { get; private set; }
     private SimpleTimer actionTimer;
     private GameObject currectParticle;
 
@@ -86,10 +86,16 @@ public class Chair : MonoBehaviour, IInteractable
         }
 
         UpdateVisuals(type, playerId);
+        
+        Destroy(actionTimer);
+        Destroy(currectParticle);
+        isInteracting = false;
+        progressBar.gameObject.SetActive(false);
+        
         App.Instance.AudioManager.FinishInteraction(type);
     }
 
-    public void InteractEnd(InteractionType type, int playerId)
+    public void InteractCancel(InteractionType type, int playerId)
     {
         Debug.Log("Interaction ended");
         Destroy(actionTimer);
@@ -98,6 +104,7 @@ public class Chair : MonoBehaviour, IInteractable
         EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
         // update visuals
         progressBar.gameObject.SetActive(false);
+        App.Instance.AudioManager.FinishInteraction(type);
     }
 
     private void UpdateVisuals(InteractionType type, int playerId)
