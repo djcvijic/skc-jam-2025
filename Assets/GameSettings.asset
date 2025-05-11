@@ -15,9 +15,9 @@ MonoBehaviour:
   InteractionRange: 2
   Player1Color: {r: 1, g: 1, b: 1, a: 1}
   Player2Color: {r: 0, g: 0, b: 0, a: 1}
-  scratchDuration: 7
-  pissDuration: 15
-  shedDuration: 3
+  scratchDuration: 4
+  pissDuration: 6
+  shedDuration: 2
   scratchPoints: 10
   pissPoints: 20
   shit: 0
@@ -29,6 +29,7 @@ MonoBehaviour:
   <CatAcceleration>k__BackingField: 100
   <CatMaxSpeed>k__BackingField: 20
   <CatFriction>k__BackingField: 20
+  <StunDuration>k__BackingField: 5
   Piss1: {fileID: 21300000, guid: 4ef38a79f230db9428162a7231049039, type: 3}
   Piss2: {fileID: 21300000, guid: a259bfc79a2724bee9d0cfc7197b779b, type: 3}
   Scratch1: {fileID: 21300000, guid: 34e665dea93660e4e8099300f80e380b, type: 3}

@@ -779,7 +779,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  speed: 4
+  speed: 2
   waitTime: 0.5
   endWaitTime: 2
   animator: {fileID: 6198839861400830530}
