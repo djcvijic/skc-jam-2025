@@ -16,6 +16,7 @@ public class GameSettings : ScriptableObject
 
     public int scratchPoints = 1;
     public int pissPoints = 1;
+    public int shit;
     public int shedPoints = 1;
 
     public int MaxScratchAmount = 4;

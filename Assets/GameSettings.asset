@@ -15,12 +15,13 @@ MonoBehaviour:
   InteractionRange: 2
   Player1Color: {r: 1, g: 1, b: 1, a: 1}
   Player2Color: {r: 0, g: 0, b: 0, a: 1}
-  scratchDuration: 5
-  pissDuration: 5
-  shedDuration: 5
-  scratchPoints: 1
-  pissPoints: 1
-  shedPoints: 1
+  scratchDuration: 7
+  pissDuration: 15
+  shedDuration: 3
+  scratchPoints: 10
+  pissPoints: 20
+  shit: 0
+  shedPoints: 3
   MaxScratchAmount: 4
   NumberOfChairs: 8
   MaxScoreFactor: 0.4
@@ -34,6 +35,7 @@ MonoBehaviour:
   Scratch2: {fileID: 21300000, guid: 2c48cf5f2e9f5604a8a711b482b1c5f3, type: 3}
   Shed1: {fileID: 21300000, guid: 232f28ecb02834b6b80571442a32389a, type: 3}
   Shed2: {fileID: 21300000, guid: e523e974712814be680bee8429f92ba4, type: 3}
+  TimePerGame: 120
   pissEffect: {fileID: 2208398248171106187, guid: 141502cfd7341c243bfb6e1889b14664, type: 3}
   scratchEffect: {fileID: 7430072158196497426, guid: 1f19413c92c2dfa40b55584426962f3d, type: 3}
   shedEffect: {fileID: 6511999817825407053, guid: fe1103e765b6e64438bd21387462db15, type: 3}
