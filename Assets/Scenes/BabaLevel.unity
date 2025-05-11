@@ -395,6 +395,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1011115156}
     - target: {fileID: 5958906028798001376, guid: 737aafc6168190d4380e3ef4cd08f3cb, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958906028798001376, guid: 737aafc6168190d4380e3ef4cd08f3cb, type: 3}
+      propertyPath: waitTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958906028798001376, guid: 737aafc6168190d4380e3ef4cd08f3cb, type: 3}
+      propertyPath: endWaitTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958906028798001376, guid: 737aafc6168190d4380e3ef4cd08f3cb, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 68409325}
