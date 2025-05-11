@@ -43,6 +43,10 @@ public class GameOver : MonoBehaviour
         var gameOverState = GetGameOverState(player1Score, player2Score);
         WinText.text = GetWinText(gameOverState);
         SetWinnerIcon(gameOverState);
+        if (gameOverState == GameOverState.Draw)
+            App.Instance.AudioManager.LoseSound();
+        else
+            App.Instance.AudioManager.WinSound();
         
         Time.timeScale = 0;
         EndScreen.gameObject.SetActive(true);
