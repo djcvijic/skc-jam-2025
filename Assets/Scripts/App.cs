@@ -13,9 +13,4 @@ public class App : MonoSingleton<App>
         base.Awake();
         EventsNotifier.Instance.ResetEvents();
     }
-
-    private void Start()
-    {
-        AudioManager.StartMainMenuMusic();
-    }
 }
