@@ -5,6 +5,7 @@ public class EventsNotifier
     public event Action<InteractionType, int> OnInteractionEnded;
     public event Action OnGameOverTimerFinished;
     public event Action<string, int> OnAnimationChange;
+    public event Action<bool> GrannyAttack;
 
     public void NotifyInteractionEnded(InteractionType interactionType, int playerId)
         => OnInteractionEnded?.Invoke(interactionType, playerId);
@@ -14,6 +15,9 @@ public class EventsNotifier
 
     public void TriggerAnimationChange(string animationName, int playerId)
         => OnAnimationChange?.Invoke(animationName, playerId);
+
+    public void TriggerGrannyFight(bool fight)
+        => GrannyAttack?.Invoke(fight);
 
     public void ResetEvents()
     {
