@@ -95,10 +95,12 @@ MonoBehaviour:
   mainMenuMusic: {fileID: 11400000, guid: d54e3de1bf2bb4218964537acce1e03f, type: 2}
   musicStart: {fileID: 11400000, guid: 35693869bef9b4d37b2b77dae5c55884, type: 2}
   musicLoop: {fileID: 11400000, guid: 20002273c49d44f0da4da221f877d63f, type: 2}
+  buttonClick: {fileID: 11400000, guid: 45b608314c8b3400cb9852f4e7c0106e, type: 2}
   catFight: {fileID: 11400000, guid: 856b898ec8ccb432ea45a9792a6a0070, type: 2}
   loseSound: {fileID: 11400000, guid: 7d7d52d9bba23415088ca2fcf1d847cf, type: 2}
   meow: {fileID: 11400000, guid: e60d2df5ad9ab4bcd80956292e1406f4, type: 2}
   pee: {fileID: 11400000, guid: a57fc6f2d75da428aadb6cf527c1041f, type: 2}
   scratch: {fileID: 11400000, guid: 50409f2ff1f424f7c8690833bfd5923b, type: 2}
   shedding: {fileID: 11400000, guid: 9860fa7c9dc144d36b135a023007bb25, type: 2}
+  vaseBreak: {fileID: 11400000, guid: 1bdb65621c6a14fc4a792658a22ac4a9, type: 2}
   winSound: {fileID: 11400000, guid: ba04500d400914d53acbc3af64088d48, type: 2}
