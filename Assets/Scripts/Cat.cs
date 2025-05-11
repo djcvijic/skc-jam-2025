@@ -52,7 +52,7 @@ public class Cat : PlayerInteractor
                 if (interactionInProgress.HasValue) break;
 
                 if (!interactingWith.CanInteract(type, playerId)) break;
-                
+
                 Debug.Log($"Player {playerId} started {type.ToString()} on {interactingWith.gameObject.name}");
                 interactionInProgress = type;
                 interactingWith.InteractStart(type, playerId);

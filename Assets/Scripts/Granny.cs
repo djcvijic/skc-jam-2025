@@ -11,6 +11,8 @@ public class Granny : MonoBehaviour
     [SerializeField] private float speed = 2f;
     [SerializeField] private float waitTime = 1f;
     [SerializeField] private float endWaitTime = 5f;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Transform sprite;
     
     private int currentWaypoint = 1;
     private bool forwardMotion = true;
@@ -32,6 +34,7 @@ public class Granny : MonoBehaviour
 
     private IEnumerator MoveThroughWaypoints(List<Transform> path, int startingWaypoint)
     {
+        animator.Play("GrannyWalk");
         inMotion = true;
         for (int i = startingWaypoint; i < path.Count; i++)
         {
@@ -40,6 +43,14 @@ public class Granny : MonoBehaviour
             while (Vector3.Distance(transform.position, target.position) > 0.000001f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+                if (transform.position.x < target.position.x)
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+                else if(transform.position.x > target.position.x)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
                 yield return null;
             }
             currentWaypoint++;
@@ -47,6 +58,7 @@ public class Granny : MonoBehaviour
             if (i == path.Count - 1)
             {
                 inMotion = false;
+                animator.Play("GrannyIdle");
                 yield return new WaitForSeconds(endWaitTime);
                 currentWaypoint = 1;
                 if (forwardMotion)
@@ -61,7 +73,9 @@ public class Granny : MonoBehaviour
                 }
             }
             else
+                animator.Play("GrannyIdle");
                 yield return new WaitForSeconds(waitTime);
+                animator.Play("GrannyWalk");
         }
     }
 

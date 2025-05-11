@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Object = UnityEngine.Object;
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "Game Settings")]
 public class GameSettings : ScriptableObject
@@ -37,6 +38,10 @@ public class GameSettings : ScriptableObject
     public Sprite Shed2;
 
     public float TimePerGame = 300f;
+    public GameObject pissEffect;
+    public GameObject scratchEffect;
+    public GameObject shedEffect;
+
 
     public Color GetPlayerColor(int playerId) 
     {
@@ -74,6 +79,21 @@ public class GameSettings : ScriptableObject
                 return pissDuration;
             case InteractionType.Shed:
                 return shedDuration;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+    }
+
+    public GameObject GetInteractionParticles(InteractionType type)
+    {
+        switch (type)
+        {
+            case InteractionType.Scratch:
+                return scratchEffect;
+            case InteractionType.Piss:
+                return pissEffect;
+            case InteractionType.Shed:
+                return shedEffect;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }

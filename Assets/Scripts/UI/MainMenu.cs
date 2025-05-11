@@ -24,19 +24,23 @@ public class MainMenu : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        SceneManager.LoadScene("BabaLevel");
+        App.Instance.AudioManager.ButtonClick();
         App.Instance.AudioManager.StartLevelMusic();
+        SceneManager.LoadScene("BabaLevel");
     }
     private void OnSettingsButtonClicked()
     {
+        App.Instance.AudioManager.ButtonClick();
         ToggleSettingsPanel();
     }
     private void OnCreditsButtonClicked()
     {
+        App.Instance.AudioManager.ButtonClick();
         ToggleCreditsPanel();
     }
     private void OnQuitButtonClicked()
     {
+        App.Instance.AudioManager.ButtonClick();
         Application.Quit();
     }
 
