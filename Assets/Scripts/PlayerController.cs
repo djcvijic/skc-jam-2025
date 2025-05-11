@@ -2,9 +2,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Cat))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    private Cat _cat;
     private Rigidbody2D _rb;
     private Vector2 moveInput;
     [SerializeField] private int playerId;
@@ -15,17 +17,9 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _cat = GetComponent<Cat>();
         _rb = GetComponent<Rigidbody2D>();
         _rb.drag = Friction;
-    }
-
-    private void Update()
-    {
-        Vector3 force = (Vector3)moveInput * Acceleration;
-        _rb.AddForce(force * Time.deltaTime);
-
-        if (_rb.velocity.magnitude > MaxSpeed)
-            _rb.velocity = _rb.velocity.normalized * MaxSpeed;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -48,5 +42,21 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    private void Update()
+    {
+        UpdateMove();
+    }
+
+    private void UpdateMove()
+    {
+        if (_cat.InMischief) return;
+
+        Vector3 force = (Vector3)moveInput * Acceleration;
+        _rb.AddForce(force * Time.deltaTime);
+
+        if (_rb.velocity.magnitude > MaxSpeed)
+            _rb.velocity = _rb.velocity.normalized * MaxSpeed;
     }
 }
