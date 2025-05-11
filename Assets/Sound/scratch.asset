@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa6550698da43c1b53b4ea42370af91, type: 3}
+  m_Name: scratch
+  m_EditorClassIdentifier: 
+  audioType: 0
+  variants:
+  - {fileID: 8300000, guid: 21d009220bf904beb91db32deaee118a, type: 3}
+  - {fileID: 8300000, guid: ea615c5942fec4514a48af643f7b298e, type: 3}
+  - {fileID: 8300000, guid: f6ab74786d07b4248829c654a5a71782, type: 3}
+  defaultVolume: 0.8
+  limitBehaviour: 0

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Chair : MonoBehaviour, IInteractable
@@ -58,39 +59,33 @@ public class Chair : MonoBehaviour, IInteractable
 
         actionTimer = gameObject.AddComponent<SimpleTimer>();
         actionTimer.Begin(App.Instance.GameSettings.GetActionDuration(type));
-        actionTimer.OnTick += (progress) => { progressBar.SetProgress(progress); };
+        actionTimer.OnTick += progress => { progressBar.SetProgress(progress); };
+        actionTimer.OnFinish += () => FinishInteraction(type, playerId);
 
+        progressBar.gameObject.SetActive(true);
+
+        App.Instance.AudioManager.StartInteraction(type);
+    }
+
+    private void FinishInteraction(InteractionType type, int playerId)
+    {
         switch (type)
         {
             case InteractionType.Scratch:
-                actionTimer.OnFinish += () =>
-                {
-                    Scratch(playerId);
-                    UpdateVisuals(InteractionType.Scratch, playerId);
-                };
+                scratch = new ScratchData(playerId, scratch.ScratchAmount + 1);
                 break;
             case InteractionType.Piss:
-                actionTimer.OnFinish += () =>
-                {
-                    pissPlayerId = playerId;
-                    UpdateVisuals(InteractionType.Piss, playerId);
-                };
+                pissPlayerId = playerId;
                 break;
             case InteractionType.Shed:
-                actionTimer.OnFinish += () =>
-                {
-                    shedPlayerId = playerId;
-                    UpdateVisuals(InteractionType.Shed, playerId);
-                };
+                shedPlayerId = playerId;
                 break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
 
-        progressBar.gameObject.SetActive(true);
-    }
-
-    private void Scratch(int playerId)
-    {
-        scratch = new ScratchData(playerId, scratch.ScratchAmount + 1);
+        UpdateVisuals(type, playerId);
+        App.Instance.AudioManager.FinishInteraction(type);
     }
 
     public void InteractEnd(InteractionType type, int playerId)
