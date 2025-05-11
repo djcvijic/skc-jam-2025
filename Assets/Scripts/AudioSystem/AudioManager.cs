@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using PlayerPrefVariables;
 using UnityEngine;
 using Random = System.Random;
 
@@ -17,18 +18,18 @@ namespace Audio
 
 		private readonly Random random = new();
 
-		private bool? musicEnabled;
+		private readonly PlayerPrefBool musicMuted = new("musicMuted");
     
-		private bool? soundEnabled;
+		private readonly PlayerPrefBool soundMuted = new("soundMuted");
 
 		public bool MusicEnabled
 		{
-			get => musicEnabled.GetValueOrDefault(true);
+			get => !musicMuted.Get();
 			set
 			{
-				if (value != musicEnabled)
+				if (value != !musicMuted.Get())
 				{
-					musicEnabled = value;
+					musicMuted.Set(!value);
 					musicSources.ForEach(s => s.mute = !value);
 				}
 			}
@@ -36,12 +37,12 @@ namespace Audio
 
 		public bool SoundEnabled
 		{
-			get => soundEnabled.GetValueOrDefault(true);
+			get => !soundMuted.Get();
 			set
 			{
-				if (value != soundEnabled)
+				if (value != !soundMuted.Get())
 				{
-					soundEnabled = value;
+					soundMuted.Set(!value);
 					soundSources.ForEach(s => s.mute = !value);
 				}
 			}
