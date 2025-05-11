@@ -94,6 +94,7 @@ public class Chair : MonoBehaviour, IInteractable
         Destroy(currectParticle);
         isInteracting = false;
         progressBar.gameObject.SetActive(false);
+        App.Instance.Notifier.NotifyInteractionEnded(type, playerId);
         
         CatAnimationEventManager.TriggerAnimationChange("CatIdle", playerId);
         App.Instance.AudioManager.FinishInteraction(type);
@@ -105,7 +106,6 @@ public class Chair : MonoBehaviour, IInteractable
         Destroy(actionTimer);
         Destroy(currectParticle);
         isInteracting = false;
-        EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
         // update visuals
         progressBar.gameObject.SetActive(false);
         

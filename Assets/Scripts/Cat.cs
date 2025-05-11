@@ -65,12 +65,12 @@ public class Cat : PlayerInteractor
     
     private void OnEnable()
     {
-        CatAnimationEventManager.OnAnimationChange += HandleAnimationChange;
+        App.Instance.Notifier.OnAnimationChange += HandleAnimationChange;
     }
 
     private void OnDisable()
     {
-        CatAnimationEventManager.OnAnimationChange -= HandleAnimationChange;
+        App.Instance.Notifier.OnAnimationChange -= HandleAnimationChange;
     }
 
     private void HandleAnimationChange(string animationName, int id)

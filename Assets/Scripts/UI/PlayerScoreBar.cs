@@ -21,7 +21,7 @@ public class PlayerScoreBar : MonoBehaviour
     {
         playerScoreSlider.maxValue = App.Instance.GameSettings.MaxPossibleScore;
 
-        EventsNotifier.Instance.OnInteractionEnded += ChairInteractionEnded;
+        App.Instance.Notifier.OnInteractionEnded += ChairInteractionEnded;
         chairs = FindObjectsByType<Chair>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).ToList();
     }
 

@@ -400,6 +400,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 6636165034620664967, guid: d44df6fb21ea8234b9f7ce5b2b9a338b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7110032359509259365, guid: d44df6fb21ea8234b9f7ce5b2b9a338b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7250970481841938673, guid: d44df6fb21ea8234b9f7ce5b2b9a338b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
