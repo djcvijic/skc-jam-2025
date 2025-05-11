@@ -1,15 +1,20 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    [SerializeField] private Toggle MuteSfxToggle;
-    [SerializeField] private Toggle MuteMusicToggle;
+    public bool IsShowing => gameObject.activeInHierarchy;
+
+    [FormerlySerializedAs("MuteSfxToggle")] [SerializeField] private Toggle sfxToggle;
+    [FormerlySerializedAs("MuteMusicToggle")] [SerializeField] private Toggle musicToggle;
 
     private void Start()
     {
-        MuteSfxToggle.onValueChanged.AddListener(OnMuteSfxToggled);
-        MuteMusicToggle.onValueChanged.AddListener(OnMuteMusicToggled);
+        sfxToggle.SetIsOnWithoutNotify(App.Instance.AudioManager.SoundEnabled);
+        musicToggle.SetIsOnWithoutNotify(App.Instance.AudioManager.MusicEnabled);
+        sfxToggle.onValueChanged.AddListener(OnMuteSfxToggled);
+        musicToggle.onValueChanged.AddListener(OnMuteMusicToggled);
     }
 
     public void Show()
@@ -22,17 +27,15 @@ public class SettingsMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnMuteSfxToggled(bool isMuted)
+    private void OnMuteSfxToggled(bool isEnabled)
     {
-        Debug.Log("SFX Muted: " + isMuted);
+        App.Instance.AudioManager.SoundEnabled = isEnabled;
         App.Instance.AudioManager.ButtonClick();
-        // Example: AudioManager.Instance.SetSfxMuted(isMuted);
     }
 
-    private void OnMuteMusicToggled(bool isMuted)
+    private void OnMuteMusicToggled(bool isEnabled)
     {
-        Debug.Log("Music Muted: " + isMuted);
+        App.Instance.AudioManager.MusicEnabled = isEnabled;
         App.Instance.AudioManager.ButtonClick();
-        // Example: AudioManager.Instance.SetMusicMuted(isMuted);
     }
 }

@@ -41,18 +41,22 @@ public class MainMenu : MonoBehaviour
     private void OnQuitButtonClicked()
     {
         App.Instance.AudioManager.ButtonClick();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     private void ToggleSettingsPanel()
     {
-        SidePanel.SetActive(true);
+        SidePanel.SetActive(!SettingsMenu.IsShowing);
         CreditsMenu.Hide();
         SettingsMenu.Show();
     }
     private void ToggleCreditsPanel()
     {
-        SidePanel.SetActive(true);
+        SidePanel.SetActive(!CreditsMenu.IsShowing);
         SettingsMenu.Hide();
         CreditsMenu.Show();
     }
