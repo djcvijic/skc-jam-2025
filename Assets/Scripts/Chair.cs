@@ -18,6 +18,7 @@ public class Chair : MonoBehaviour, IInteractable
 
     private bool isInteracting;
     private SimpleTimer actionTimer;
+    private GameObject currectParticle;
 
     public void ShowInteract(bool show, int playerId)
     {
@@ -52,7 +53,7 @@ public class Chair : MonoBehaviour, IInteractable
         isInteracting = true;
 
         // start effect
-        // ParticleSystem.Instantiate();
+        currectParticle = Instantiate(App.Instance.GameSettings.GetInteractionParticles(type), transform.position, Quaternion.identity);
 
         // start progress
         Destroy(actionTimer);
@@ -91,6 +92,8 @@ public class Chair : MonoBehaviour, IInteractable
     public void InteractEnd(InteractionType type, int playerId)
     {
         Debug.Log("Interaction ended");
+        Destroy(actionTimer);
+        Destroy(currectParticle);
         isInteracting = false;
         EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
         // update visuals

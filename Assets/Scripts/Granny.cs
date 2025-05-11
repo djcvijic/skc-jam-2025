@@ -12,6 +12,7 @@ public class Granny : MonoBehaviour
     [SerializeField] private float waitTime = 1f;
     [SerializeField] private float endWaitTime = 5f;
     
+    private Animator animator;
     private int currentWaypoint = 1;
     private bool forwardMotion = true;
     private bool inMotion = false;
@@ -19,6 +20,7 @@ public class Granny : MonoBehaviour
     private void Start()
     {
         StartCoroutine(MoveThroughWaypoints(waypoints, currentWaypoint));
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -32,6 +34,7 @@ public class Granny : MonoBehaviour
 
     private IEnumerator MoveThroughWaypoints(List<Transform> path, int startingWaypoint)
     {
+        //animator.Play("GrannyWalk");
         inMotion = true;
         for (int i = startingWaypoint; i < path.Count; i++)
         {
