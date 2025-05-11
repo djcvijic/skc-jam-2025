@@ -33,15 +33,6 @@ public class PlayerController : MonoBehaviour
         {
             App.Instance.Notifier.TriggerAnimationChange("CatIdle", playerId);
         }
-
-        if (moveInput.x > 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
-        else if (moveInput.x < 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
     }
 
     private void Update()
@@ -58,6 +49,15 @@ public class PlayerController : MonoBehaviour
 
         if (_rb.velocity.magnitude > MaxSpeed)
             _rb.velocity = _rb.velocity.normalized * MaxSpeed;
+
+        if (moveInput.x > 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (moveInput.x < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     public void CancelInteraction()
