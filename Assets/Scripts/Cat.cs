@@ -59,7 +59,7 @@ public class Cat : PlayerInteractor
                 break;
             case InputActionPhase.Canceled:
                 Debug.Log($"Player {playerId} canceled {type.ToString()} on {interactingWith.gameObject.name}");
-                interactingWith.InteractEnd(type, playerId);
+                interactingWith.InteractCancel(type, playerId);
                 interactionInProgress = null;
                 break;
         }
