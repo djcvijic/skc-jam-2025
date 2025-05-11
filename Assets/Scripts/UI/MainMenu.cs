@@ -7,19 +7,28 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button PlayButton;
     [SerializeField] private Button SettingsButton;
     [SerializeField] private Button CreditsButton;
+    [SerializeField] private Button InstructionsButton;
     [SerializeField] private Button QuitButton;
+    
     
     [SerializeField] private GameObject SidePanel;
     [SerializeField] private SettingsMenu SettingsMenu;
+    [SerializeField] private GameObject InstructionsMenu;
     [SerializeField] private CreditsMenu CreditsMenu;
-
+    
     public void Start()
     {
         PlayButton.onClick.AddListener(OnPlayButtonClicked);
         SettingsButton.onClick.AddListener(OnSettingsButtonClicked);
         CreditsButton.onClick.AddListener(OnCreditsButtonClicked);
+        InstructionsButton.onClick.AddListener(OnInstructionsButtonClicked);
         QuitButton.onClick.AddListener(OnQuitButtonClicked);
         App.Instance.AudioManager.StartMainMenuMusic();
+    }
+
+    private void OnInstructionsButtonClicked()
+    {
+        ToggleInstructionsPanel();
     }
 
     private void OnPlayButtonClicked()
@@ -50,14 +59,24 @@ public class MainMenu : MonoBehaviour
 
     private void ToggleSettingsPanel()
     {
-        SidePanel.SetActive(!SettingsMenu.IsShowing);
+        SidePanel.SetActive(true);
         CreditsMenu.Hide();
+        InstructionsMenu.SetActive(false);
         SettingsMenu.Show();
     }
     private void ToggleCreditsPanel()
     {
-        SidePanel.SetActive(!CreditsMenu.IsShowing);
+        SidePanel.SetActive(true);
         SettingsMenu.Hide();
+        InstructionsMenu.SetActive(false);
         CreditsMenu.Show();
+    }
+    
+    private void ToggleInstructionsPanel()
+    {
+        SidePanel.SetActive(true);
+        InstructionsMenu.SetActive(true);
+        SettingsMenu.Hide();
+        CreditsMenu.Hide();
     }
 }

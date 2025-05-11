@@ -11,7 +11,7 @@ public class GameOver : MonoBehaviour
 {
     [SerializeField] private GameObject EndScreen;
     [SerializeField] private TMP_Text WinText;
-    [SerializeField] private Button PlayAgainButton;
+    [SerializeField] private Button MainMenuButton;
     
     [SerializeField] private Image Player1WinnerIcon;
     [SerializeField] private Image Player2WinnerIcon;
@@ -23,7 +23,7 @@ public class GameOver : MonoBehaviour
     private void Start()
     {
         App.Instance.Notifier.OnGameOverTimerFinished += OnGameTimerEnded;
-        PlayAgainButton.onClick.AddListener(OnPlayAgainButtonClicked);
+        MainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
         FindScoreBars();
     }
 
@@ -52,10 +52,10 @@ public class GameOver : MonoBehaviour
         EndScreen.gameObject.SetActive(true);
     }
 
-    private void OnPlayAgainButtonClicked()
+    private void OnMainMenuButtonClicked()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     private GameOverState GetGameOverState(int player1Score, int player2Score)

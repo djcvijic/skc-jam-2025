@@ -133,12 +133,12 @@ public class Granny : MonoBehaviour
     {
         if (closestCat != null && closestCat.InMischief)
         {
-            var interactable = other.GetComponentInParent<Cat>();
-            if (interactable != null)
+            var cat = other.GetComponentInParent<Cat>();
+            if (cat != null)
             {
-                if (interactable.InMischief)
+                if (cat.InMischief)
                 {
-                    App.Instance.Notifier.TriggerGrannyFight(true);
+                    App.Instance.Notifier.TriggerGrannyFight(cat.playerId, true);
                 }
             }
         }
@@ -146,10 +146,10 @@ public class Granny : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        var interactable = other.GetComponentInParent<Cat>();
-        if (interactable != null)
+        var cat = other.GetComponentInParent<Cat>();
+        if (cat != null)
         {
-            App.Instance.Notifier.TriggerGrannyFight(false);
+            App.Instance.Notifier.TriggerGrannyFight(cat.playerId, false);
         }
     }
     
@@ -163,7 +163,7 @@ public class Granny : MonoBehaviour
         App.Instance.Notifier.GrannyAttack -= HandleGrannyAttack;
     }
 
-    private void HandleGrannyAttack(bool fight)
+    private void HandleGrannyAttack(int playerId, bool fight)
     {
         if (fight)
         {
