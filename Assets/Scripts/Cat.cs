@@ -7,6 +7,9 @@ public class Cat : MonoBehaviour
     public int playerId;
     [SerializeField] Animator animator;
     [SerializeField] private ThoughtBubble thoughtBubble;
+    [SerializeField] private Transform sprite;
+    
+    private readonly Vector3 upsideDown = new(1, -1, 1);
     
     private IInteractable interactingWith;
 
@@ -97,9 +100,12 @@ public class Cat : MonoBehaviour
 
     private IEnumerator BeStunned()
     {
+        sprite.localScale = upsideDown;
+
         var stunDuration = App.Instance.GameSettings.StunDuration;
         yield return new WaitForSeconds(stunDuration);
 
         stunnedCoroutine = null;
+        sprite.localScale = Vector3.one;
     }
 }
