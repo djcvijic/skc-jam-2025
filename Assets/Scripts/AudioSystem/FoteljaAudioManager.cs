@@ -5,34 +5,46 @@ using UnityEngine;
 public class FoteljaAudioManager : AudioManager
 {
     [Header("Music")]
+    [SerializeField] private AudioClipSettings mainMenuMusic;
     [SerializeField] private AudioClipSettings musicStart;
     [SerializeField] private AudioClipSettings musicLoop;
 
     [Header("Sounds")]
     [SerializeField] private AudioClipSettings dash;
-    [SerializeField] private AudioClipSettings bubblePop;
-    [SerializeField] private AudioClipSettings unlockNewDepth;
-    [SerializeField] private AudioClipSettings enemyKill;
-    [SerializeField] private AudioClipSettings bossKill;
-    [SerializeField] private AudioClipSettings damageEnemy;
-    [SerializeField] private AudioClipSettings damageTaken;
-    [SerializeField] private AudioClipSettings whistle;
 
-    private bool _musicPlaying;
+    private bool mainMenuMusicPlaying;
+    private bool levelMusicPlaying;
 
-    public void StartMusic()
+    public void StartMainMenuMusic()
     {
+        StopAudio(musicStart);
         StopAudio(musicLoop);
 
-        if (!_musicPlaying)
+        levelMusicPlaying = false;
+
+        if (!mainMenuMusicPlaying)
         {
-            _musicPlaying = true;
-            PlayAudio(musicStart);
-            StartCoroutine(StartMusicLoop());
+            mainMenuMusicPlaying = true;
+            PlayAudio(mainMenuMusic);
         }
     }
 
-    private IEnumerator StartMusicLoop()
+    public void StartLevelMusic()
+    {
+        StopAudio(mainMenuMusic);
+        StopAudio(musicLoop);
+
+        mainMenuMusicPlaying = false;
+
+        if (!levelMusicPlaying)
+        {
+            levelMusicPlaying = true;
+            PlayAudio(musicStart);
+            StartCoroutine(StartLevelMusicLoop());
+        }
+    }
+
+    private IEnumerator StartLevelMusicLoop()
     {
         yield return new WaitForSeconds(musicStart.Variants[0].length);
 
@@ -41,16 +53,4 @@ public class FoteljaAudioManager : AudioManager
     }
 
     public void Dash() => PlayAudio(dash);
-
-    public void BubblePop() => PlayAudio(bubblePop);
-
-    public void UnlockNewDepth() => PlayAudio(unlockNewDepth);
-
-    public void EnemyKill() => PlayAudio(enemyKill);
-
-    public void BossKill() => PlayAudio(bossKill);
-
-    public void DamageEnemy() => PlayAudio(damageEnemy);
-
-    public void DamageTaken() => PlayAudio(damageTaken);
 }

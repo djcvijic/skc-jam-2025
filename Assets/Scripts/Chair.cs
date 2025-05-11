@@ -17,6 +17,7 @@ public class Chair : MonoBehaviour, IInteractable
 
     private bool isInteracting;
     private SimpleTimer actionTimer;
+    private GameObject currectParticle;
 
     public void ShowInteract(bool show, int playerId)
     {
@@ -25,14 +26,10 @@ public class Chair : MonoBehaviour, IInteractable
 
         outlineImage.gameObject.SetActive(show);
         outlineImage.color = App.Instance.GameSettings.GetPlayerColor(playerId);
-
-        isInteracting = show;
     }
 
     public bool CanInteract(InteractionType type, int playerId)
     {
-        if (isInteracting) return false;
-
         switch (type)
         {
             case InteractionType.Scratch:
@@ -43,7 +40,7 @@ public class Chair : MonoBehaviour, IInteractable
                 if (pissPlayerId == playerId) return false;
                 break;
             case InteractionType.Shed:
-                if (shedPlayerId == playerId) return false;
+                if (shedPlayerId == playerId || shedPlayerId != -1) return false;
                 break;
         }
 
@@ -52,8 +49,10 @@ public class Chair : MonoBehaviour, IInteractable
 
     public void InteractStart(InteractionType type, int playerId)
     {
+        isInteracting = true;
+
         // start effect
-        // ParticleSystem.Instantiate();
+        currectParticle = Instantiate(App.Instance.GameSettings.GetInteractionParticles(type), transform.position, Quaternion.identity);
 
         // start progress
         Destroy(actionTimer);
@@ -98,6 +97,9 @@ public class Chair : MonoBehaviour, IInteractable
     public void InteractEnd(InteractionType type, int playerId)
     {
         Debug.Log("Interaction ended");
+        Destroy(actionTimer);
+        Destroy(currectParticle);
+        isInteracting = false;
         EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
         // update visuals
         progressBar.gameObject.SetActive(false);
@@ -105,20 +107,20 @@ public class Chair : MonoBehaviour, IInteractable
 
     private void UpdateVisuals(InteractionType type, int playerId)
     {
-        Color color = App.Instance.GameSettings.GetPlayerColor(playerId);
+        Sprite actionSprite = App.Instance.GameSettings.GetPlayerActionSprite(type, playerId);
         switch (type)
         {
             case InteractionType.Scratch:
                 scratchImage.gameObject.SetActive(true);
-                scratchImage.color = color;
+                scratchImage.sprite = actionSprite;
                 break;
             case InteractionType.Piss:
                 pissImage.gameObject.SetActive(true);
-                pissImage.color = color;
+                pissImage.sprite = actionSprite;
                 break;
             case InteractionType.Shed:
                 shedImage.gameObject.SetActive(true);
-                shedImage.color = color;
+                shedImage.sprite = actionSprite;
                 break;
         }
     }

@@ -12,7 +12,7 @@ public class Cat : PlayerInteractor
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var interactable = other.GetComponentInParent<Chair>();
+        var interactable = other.GetComponentInParent<IInteractable>();
         if (interactable != null)
         {
             Debug.Log($"Reached interactable: {interactable.gameObject.name}");
@@ -23,7 +23,7 @@ public class Cat : PlayerInteractor
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        var interactable = other.GetComponentInParent<Chair>();
+        var interactable = other.GetComponentInParent<IInteractable>();
         if (interactable != null)
         {
             interactable.ShowInteract(false, playerId);
@@ -44,11 +44,15 @@ public class Cat : PlayerInteractor
     {
         if (interactingWith is null) return;
 
-        if (interactionInProgress.HasValue && interactionInProgress != type) return;
-
+        if (!interactingWith.CanInteract(type, playerId)) return;
+        
         switch (context.phase)
         {
             case InputActionPhase.Started:
+                if (interactionInProgress.HasValue) break;
+
+                if (!interactingWith.CanInteract(type, playerId)) break;
+                
                 Debug.Log($"Player {playerId} started {type.ToString()} on {interactingWith.gameObject.name}");
                 interactionInProgress = type;
                 interactingWith.InteractStart(type, playerId);

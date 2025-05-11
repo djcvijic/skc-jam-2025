@@ -19,11 +19,13 @@ public class MainMenu : MonoBehaviour
         SettingsButton.onClick.AddListener(OnSettingsButtonClicked);
         CreditsButton.onClick.AddListener(OnCreditsButtonClicked);
         QuitButton.onClick.AddListener(OnQuitButtonClicked);
+        App.Instance.AudioManager.StartMainMenuMusic();
     }
 
     private void OnPlayButtonClicked()
     {
         SceneManager.LoadScene("BabaLevel");
+        App.Instance.AudioManager.StartLevelMusic();
     }
     private void OnSettingsButtonClicked()
     {

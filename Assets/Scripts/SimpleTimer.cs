@@ -16,16 +16,16 @@ public class SimpleTimer : MonoBehaviour
             isCountingDown = true;
             this.duration = duration;
             timeRemaining = duration;
-            Invoke("Tick", 0.2f);
+            Invoke("Tick", 0.1f);
         }
     }
 
     private void Tick()
     {
-        timeRemaining -= 0.2f;
+        timeRemaining -= 0.1f;
         if (timeRemaining > 0)
         {
-            Invoke("Tick", 0.2f);
+            Invoke("Tick", 0.1f);
         }
         else
         {
