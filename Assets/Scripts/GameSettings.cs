@@ -31,6 +31,7 @@ public class GameSettings : ScriptableObject
     [field: SerializeField] public float CatMaxSpeed { get; private set; } = 1f;
     [field: SerializeField] public float CatFriction { get; private set; } = 1f;
     [field: SerializeField] public float StunDuration { get; private set; } = 5f;
+    [field: SerializeField] public float GrannyFightDuration { get; private set; } = 3f;
 
     public Sprite Piss1;
     public Sprite Piss2;

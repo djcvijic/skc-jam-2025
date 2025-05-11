@@ -18,6 +18,9 @@ public class Granny : MonoBehaviour
     private int currentWaypoint = 1;
     private bool forwardMotion = true;
     private bool inMotion = false;
+    private Coroutine attackCoroutine;
+
+    public bool IsAttacking => attackCoroutine != null;
 
     private void Start()
     {
@@ -56,6 +59,11 @@ public class Granny : MonoBehaviour
 
     private IEnumerator MoveThroughWaypoints(List<Transform> path, int startingWaypoint)
     {
+        while (IsAttacking)
+        {
+            yield return null;
+        }
+        
         animator.Play("GrannyWalk");
         inMotion = true;
         for (int i = startingWaypoint; i < path.Count; i++)
@@ -106,6 +114,11 @@ public class Granny : MonoBehaviour
 
     private IEnumerator MoveTowardsCat()
     {
+        while (IsAttacking)
+        {
+            yield return null;
+        }
+
         while (closestCat && closestCat.InMischief)
         {
             transform.position =
@@ -138,40 +151,26 @@ public class Granny : MonoBehaviour
             {
                 if (cat.InMischief)
                 {
-                    App.Instance.Notifier.TriggerGrannyFight(cat.playerId, true);
+                    StartGrannyAttack(cat.playerId);
                 }
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void StartGrannyAttack(int playerId)
     {
-        var cat = other.GetComponentInParent<Cat>();
-        if (cat != null)
-        {
-            App.Instance.Notifier.TriggerGrannyFight(cat.playerId, false);
-        }
-    }
-    
-    private void OnEnable()
-    {
-        App.Instance.Notifier.GrannyAttack += HandleGrannyAttack;
+        App.Instance.Notifier.TriggerGrannyFight(playerId);
+        animator.Play("GrannyAttack");
+        
+        if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+        attackCoroutine = StartCoroutine(FinishAttack());
     }
 
-    private void OnDisable()
+    private IEnumerator FinishAttack()
     {
-        App.Instance.Notifier.GrannyAttack -= HandleGrannyAttack;
-    }
-
-    private void HandleGrannyAttack(int playerId, bool fight)
-    {
-        if (fight)
-        {
-            animator.Play("GrannyAttack");
-        }
-        else
-        {
-            animator.Play("GrannyWalk");
-        }
+        yield return new WaitForSeconds(App.Instance.GameSettings.GrannyFightDuration);
+        
+        animator.Play("GrannyWalk");
+        attackCoroutine = null;
     }
 }

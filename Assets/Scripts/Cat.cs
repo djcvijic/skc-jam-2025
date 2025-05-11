@@ -98,11 +98,9 @@ public class Cat : MonoBehaviour
         animator.Play(animationName);
     }
 
-    private void HandleGrannyAttack(int pid, bool started)
+    private void HandleGrannyAttack(int pid)
     {
         if (pid != playerId) return;
-
-        if (!started) return;
 
         if (stunnedCoroutine != null)
             StopCoroutine(stunnedCoroutine);
