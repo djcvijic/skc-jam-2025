@@ -22,7 +22,7 @@ public class GameOver : MonoBehaviour
     
     private void Start()
     {
-        EventsNotifier.Instance.OnGameOverTimerFinished += OnGameTimerEnded;
+        App.Instance.Notifier.OnGameOverTimerFinished += OnGameTimerEnded;
         PlayAgainButton.onClick.AddListener(OnPlayAgainButtonClicked);
         FindScoreBars();
     }

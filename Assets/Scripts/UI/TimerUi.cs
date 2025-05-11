@@ -27,7 +27,7 @@ public class TimerUi : MonoBehaviour
         {
             timeRemaining = 0;
             timerRunning = false;
-            EventsNotifier.Instance.NotifyGameOver();
+            App.Instance.Notifier.NotifyGameOver();
         }
 
         UpdateTimerText();
