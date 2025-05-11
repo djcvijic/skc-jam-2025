@@ -6,9 +6,8 @@ public class Cat : PlayerInteractor
     [SerializeField] private ThoughtBubble thoughtBubble;
     
     private IInteractable interactingWith;
-    private InteractionType? interactionInProgress;
 
-    public bool InMischief => interactionInProgress.HasValue;
+    public bool InMischief => interactingWith is { isInteracting: true };
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -49,18 +48,16 @@ public class Cat : PlayerInteractor
         switch (context.phase)
         {
             case InputActionPhase.Started:
-                if (interactionInProgress.HasValue) break;
+                if (InMischief) break;
 
                 if (!interactingWith.CanInteract(type, playerId)) break;
 
                 Debug.Log($"Player {playerId} started {type.ToString()} on {interactingWith.gameObject.name}");
-                interactionInProgress = type;
                 interactingWith.InteractStart(type, playerId);
                 break;
             case InputActionPhase.Canceled:
                 Debug.Log($"Player {playerId} canceled {type.ToString()} on {interactingWith.gameObject.name}");
                 interactingWith.InteractCancel(type, playerId);
-                interactionInProgress = null;
                 break;
         }
     }
