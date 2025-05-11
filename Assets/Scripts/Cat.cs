@@ -8,6 +8,7 @@ public class Cat : PlayerInteractor
     private IInteractable interactingWith;
 
     public bool InMischief => interactingWith is { isInteracting: true };
+    [SerializeField] Animator animator;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
