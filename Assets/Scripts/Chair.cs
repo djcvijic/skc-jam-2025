@@ -16,7 +16,7 @@ public class Chair : MonoBehaviour, IInteractable
 
     private ScratchData scratch = new(0, 0);
 
-    private bool isInteracting;
+    public bool isInteracting { get; private set; }
     private SimpleTimer actionTimer;
     private GameObject currectParticle;
 
