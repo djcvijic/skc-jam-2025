@@ -10,8 +10,6 @@ public class TimerUi : MonoBehaviour
     private float timeRemaining;
     private bool timerRunning;
 
-    public Action OnTimerFinished;
-
     private void Start()
     {
         timeRemaining = TimePerGame;
@@ -29,7 +27,7 @@ public class TimerUi : MonoBehaviour
         {
             timeRemaining = 0;
             timerRunning = false;
-            OnTimerFinished?.Invoke();
+            EventsNotifier.Instance.NotifyGameOver();
         }
 
         UpdateTimerText();

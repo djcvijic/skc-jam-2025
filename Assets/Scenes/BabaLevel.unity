@@ -360,10 +360,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1011115156}
     - target: {fileID: 5958906028798001376, guid: 737aafc6168190d4380e3ef4cd08f3cb, type: 3}
-      propertyPath: waypoints.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5958906028798001376, guid: 737aafc6168190d4380e3ef4cd08f3cb, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 68409325}
@@ -399,10 +395,6 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[8]
       value: 
       objectReference: {fileID: 68409317}
-    - target: {fileID: 5958906028798001376, guid: 737aafc6168190d4380e3ef4cd08f3cb, type: 3}
-      propertyPath: reversedWaypoints.Array.size
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 5958906028798001376, guid: 737aafc6168190d4380e3ef4cd08f3cb, type: 3}
       propertyPath: reversedWaypoints.Array.data[0]
       value: 
@@ -587,6 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameSettings: {fileID: 11400000, guid: df72f8264c1bbcc4397904faee51597b, type: 2}
   Prefabs: {fileID: 11400000, guid: 5fad966d02215f04e94045ee1bb88310, type: 2}
+  <AudioManager>k__BackingField: {fileID: 0}
 --- !u!4 &1240857338
 Transform:
   m_ObjectHideFlags: 0
@@ -1168,3 +1161,4 @@ SceneRoots:
   - {fileID: 1240857338}
   - {fileID: 311209918}
   - {fileID: 68409316}
+  - {fileID: 7209788855748897028}
