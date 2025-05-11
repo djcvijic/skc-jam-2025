@@ -89,7 +89,7 @@ public class Chair : MonoBehaviour, IInteractable
         App.Instance.AudioManager.FinishInteraction(type);
     }
 
-    public void InteractEnd(InteractionType type, int playerId)
+    public void InteractCancel(InteractionType type, int playerId)
     {
         Debug.Log("Interaction ended");
         Destroy(actionTimer);
@@ -98,6 +98,7 @@ public class Chair : MonoBehaviour, IInteractable
         EventsNotifier.Instance.NotifyInteractionEnded(type, playerId);
         // update visuals
         progressBar.gameObject.SetActive(false);
+        App.Instance.AudioManager.FinishInteraction(type);
     }
 
     private void UpdateVisuals(InteractionType type, int playerId)
